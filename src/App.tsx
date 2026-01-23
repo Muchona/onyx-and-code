@@ -169,10 +169,10 @@ export default function App() {
           ONYX <span className="text-gold-accent drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">&</span> CODE
         </div>
 
-        {['ABOUT', 'PROCESS', 'PORTFOLIO', 'CONTACT'].map((item) => (
+        {['ABOUT', 'PROCESS', 'PORTFOLIO', 'CONTACT', 'LABS'].map((item) => (
           <a
             key={item}
-            href={`#${item.toLowerCase()}`}
+            href={item === 'LABS' ? '/labs' : `#${item.toLowerCase()}`}
             className="text-4xl font-extrabold tracking-[2px] text-white/70 md:hover:text-white transition-all duration-300 md:hover:scale-105"
             onClick={() => setIsMenuOpen(false)}
           >

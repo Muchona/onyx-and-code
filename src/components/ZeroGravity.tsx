@@ -10,7 +10,16 @@ const ZeroGravity = () => {
         if (!containerRef.current) return;
 
         // --- 1. CONFIGURATION ---
-        const ITEMS = [
+        // --- 1. CONFIGURATION ---
+        const isMobile = window.innerWidth < 768;
+
+        const ITEMS = isMobile ? [
+            { w: 120, h: 60, label: "Gemini", tech: "AI-1.5" },
+            { w: 100, h: 100, label: "Physics", tech: "Matter" },
+            { w: 140, h: 80, label: "Visuals", tech: "GSAP" },
+            { w: 110, h: 110, label: "Design", tech: "Figma" },
+            { w: 130, h: 50, label: "Deploy", tech: "Vercel" }
+        ] : [
             { w: 200, h: 100, label: "Gemini", tech: "AI-1.5" },
             { w: 150, h: 150, label: "Physics", tech: "Matter.js" },
             { w: 250, h: 120, label: "Visuals", tech: "GSAP" },
