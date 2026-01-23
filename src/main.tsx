@@ -6,6 +6,8 @@ import App from './App.tsx'
 import Success from './Success.tsx'
 import CoffeeSplash from './components/CoffeeSplash.tsx'
 
+import ZeroGravity from './components/ZeroGravity.tsx'
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
@@ -13,6 +15,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/" element={<App />} />
         <Route path="/success" element={<Success />} />
         <Route path="/splash" element={<CoffeeSplash />} />
+        <Route path="/labs" element={<ZeroGravity />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

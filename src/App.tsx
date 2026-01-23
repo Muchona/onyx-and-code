@@ -131,9 +131,9 @@ export default function App() {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-10 absolute left-1/2 -translate-x-1/2">
-          {['ABOUT', 'PROCESS', 'PORTFOLIO', 'CONTACT'].map((item) => (
+          {['ABOUT', 'PROCESS', 'PORTFOLIO', 'CONTACT', 'LABS'].map((item) => (
             <li key={item}>
-              <a href={`#${item.toLowerCase()}`} className="text-xs font-bold tracking-[2px] text-gray-400 md:hover:text-white transition-all duration-300 md:hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)] md:hover:scale-110 inline-block cursor-pointer">
+              <a href={item === 'LABS' ? '/labs' : `#${item.toLowerCase()}`} className="text-xs font-bold tracking-[2px] text-gray-400 md:hover:text-white transition-all duration-300 md:hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)] md:hover:scale-110 inline-block cursor-pointer">
                 {item}
               </a>
             </li>
