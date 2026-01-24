@@ -21,6 +21,22 @@
     }
   }
 
+  --animate-shine: shine 6s linear infinite;
+
+  @keyframes shine {
+    0% {
+      transform: translateX(-200%) skewX(-20deg);
+    }
+
+    40% {
+      transform: translateX(400%) skewX(-20deg);
+    }
+
+    100% {
+      transform: translateX(400%) skewX(-20deg);
+    }
+  }
+
 
 }
 
