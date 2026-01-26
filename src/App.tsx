@@ -342,6 +342,12 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
               {[
                 {
+                  title: 'The Batch Loaf',
+                  desc: 'Contemporary Artisan Bakery & Restaurant.',
+                  img: '/the-batch-loaf.png',
+                  link: 'https://muchona.github.io/the-batch-loaf/'
+                },
+                {
                   title: "Jimmy's Bar & Restaurant",
                   desc: "Premium Gastropub experience with Onyx-tier design.",
                   img: '/jimmys-bg.jpg',
