@@ -342,6 +342,14 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
               {[
                 {
+                  title: 'B3D Designs',
+                  desc: 'Interactive 3D architectural visualization & precision renders.',
+                  img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800',
+                  link: 'https://muchona.github.io/b3d-designs/',
+                  has3D: true,
+                  demoLink: 'https://muchona.github.io/b3d-designs/'
+                },
+                {
                   title: 'The Batch Loaf',
                   desc: 'Contemporary Artisan Bakery & Restaurant.',
                   img: '/the-batch-loaf.png',
