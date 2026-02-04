@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 interface Message {
     id: number;
@@ -35,7 +36,7 @@ export default function AgentChat() {
 
     useEffect(scrollToBottom, [messages]);
 
-    const handleSend = (e: React.FormEvent) => {
+    const handleSend = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!input.trim()) return;
 
@@ -44,21 +45,63 @@ export default function AgentChat() {
         setInput('');
         setIsTyping(true);
 
-        // Simulate Agent Response
-        setTimeout(() => {
-            const agentResponses = [
-                "Analyzing request parameters...",
-                "Accessing Onyx secure database...",
-                "That is within our operational capabilities.",
-                "I can schedule a briefing with the Chairman.",
-                "Deploying visualization protocols."
-            ];
-            const randomResponse = agentResponses[Math.floor(Math.random() * agentResponses.length)];
+        try {
+            const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
-            const agentMsg: Message = { id: Date.now() + 1, type: 'agent', text: randomResponse };
-            setMessages(prev => [...prev, agentMsg]);
+            if (apiKey && apiKey !== 'YOUR_API_KEY_HERE') {
+                // Real AI Mode
+                const genAI = new GoogleGenerativeAI(apiKey);
+                const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
+
+                const prompt = `
+                    You are "Agent CORE", a high-end digital architecture assistant for "Onyx & Code".
+                    You are intelligent, professional, and slightly sci-fi/futuristic in tone.
+                    You help users build premium 3D websites.
+                    Keep answers concise (under 50 words) and helpful.
+                    User: ${userMsg.text}
+                `;
+
+                const result = await model.generateContent(prompt);
+                const response = result.response;
+                const text = response.text();
+
+                setMessages(prev => [...prev, { id: Date.now() + 1, type: 'agent', text: text }]);
+            } else {
+                // Fallback to "Dumb" Mode (Local Logic)
+                setTimeout(() => {
+                    const lowerInput = userMsg.text.toLowerCase();
+                    let responseText = "";
+
+                    if (lowerInput.match(/\b(hi|hello|hey|greetings)\b/)) {
+                        responseText = "Greetings using protocol v1. Systems are online. How can I assist you?";
+                    } else if (lowerInput.includes("how are you") || lowerInput.includes("status")) {
+                        responseText = "All systems functioning within normal parameters. Efficiency at 99.8%. Thank you for inquiring.";
+                    } else if (lowerInput.includes("price") || lowerInput.includes("cost") || lowerInput.includes("much")) {
+                        responseText = "Project estimations vary based on complexity. For a standard commercial suite, we offer competitive tiers.";
+                    } else if (lowerInput.includes("who are you") || lowerInput.includes("what is this")) {
+                        responseText = "I am Agent CORE, the primary digital interface for Onyx & Code. I facilitate high-end web architecture.";
+                    } else if (lowerInput.includes("bye") || lowerInput.includes("goodbye")) {
+                        responseText = "Session termination acknowledged. Have a productive cycle.";
+                    } else {
+                        const fallbackResponses = [
+                            "Analyzing input... request parameters ambiguous.",
+                            "Accessing Onyx secure database for context...",
+                            "I am listening. Please elaborate on your directive.",
+                            "That is an interesting query. Initializing thought sub-routine.",
+                            "Data point received. Awaiting further instruction."
+                        ];
+                        responseText = fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
+                    }
+
+                    setMessages(prev => [...prev, { id: Date.now() + 1, type: 'agent', text: responseText }]);
+                }, 1000);
+            }
+        } catch (error: any) {
+            console.error("AI Error:", error);
+            setMessages(prev => [...prev, { id: Date.now() + 1, type: 'agent', text: `SYSTEM ERROR: ${error.message || "Unknown neural failure"}` }]);
+        } finally {
             setIsTyping(false);
-        }, 1500);
+        }
     };
 
     return (

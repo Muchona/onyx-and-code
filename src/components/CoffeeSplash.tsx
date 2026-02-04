@@ -136,10 +136,28 @@ export default function CoffeeSplash() {
         <OrbitControls makeDefault />
       </Canvas>
       
-      {/* Overlay Text/UI if needed, purely optional based on video style */}
+      {/* Overlay Text/UI */}
       <div style={{ position: 'absolute', bottom: 30, left: 30, color: 'white', fontFamily: 'Inter, sans-serif', opacity: 0.8 }}>
         <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 800 }}>Moffett Blend</h2>
         <p style={{ margin: 0, fontSize: '0.9rem' }}>Zero Gravity Roast</p>
+      </div>
+
+      <div style={{ position: 'absolute', top: 30, left: 30, zIndex: 100 }}>
+        <a href="/" style={{ 
+          textDecoration: 'none', 
+          color: 'white', 
+          fontFamily: 'Inter, sans-serif', 
+          fontSize: '0.8rem', 
+          letterSpacing: '2px', 
+          textTransform: 'uppercase', 
+          border: '1px solid rgba(255,255,255,0.2)',
+          padding: '10px 20px',
+          borderRadius: '30px',
+          background: 'rgba(0,0,0,0.2)',
+          backdropFilter: 'blur(10px)'
+        }}>
+          ← Return
+        </a>
       </div>
     </div>
   );
