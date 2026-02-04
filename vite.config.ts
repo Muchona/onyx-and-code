@@ -11,5 +11,5 @@ export default defineConfig({
   build: {
     chunkSizeWarningLimit: 1600,
   },
-  base: '/onyx-and-code/',
+  base: process.env.GITHUB_ACTIONS ? '/onyx-and-code/' : '/',
 })
