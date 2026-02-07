@@ -1,3 +1,4 @@
+// InsForge Client Initialization - Powered by Onyx Architecture
 import { createClient } from '@insforge/sdk';
 
 const baseUrl = import.meta.env.VITE_INSFORGE_BASE_URL;
