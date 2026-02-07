@@ -66,18 +66,30 @@ export default function App() {
     };
 
     try {
-      const { error } = await insforge.database
+      // 1. Save to InsForge Database
+      const { error: dbError } = await insforge.database
         .from('leads')
         .insert(leadData);
 
-      if (!error) {
+      if (dbError) throw dbError;
+
+      // 2. Dual-post to Formspree for Email Notifications (Zoho/Gmail)
+      const emailResponse = await fetch("https://formspree.io/f/mbddjynj", {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (emailResponse.ok) {
         navigate('/success');
       } else {
-        console.error("Transmission failed:", error);
-        alert("System error. Please contact directly via WhatsApp.");
+        console.warn("Email dispatch delayed, lead secured in database.");
+        navigate('/success'); // Still proceed as DB is the source of truth
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Transmission error:", error);
       alert("System error. Please contact directly via WhatsApp.");
     }
   };
