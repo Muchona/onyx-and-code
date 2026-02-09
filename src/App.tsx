@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Scene3D from './components/Scene3D';
+const Scene3D = lazy(() => import('./components/Scene3D'));
 import AgentChat from './components/AgentChat';
 import { insforge } from './lib/insforge';
+import { Helmet } from 'react-helmet-async';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -171,6 +172,13 @@ export default function App() {
 
   return (
     <div className="bg-onyx text-white font-sans min-h-screen selection:bg-gold-accent selection:text-black overflow-hidden">
+      <Helmet>
+        <title>Onyx & Code | High-Performance Web Development Agency Ireland</title>
+        <meta name="description" content="Onyx & Code: Monaghan-based digital architects building premium 3D websites, e-commerce platforms, and scalable web applications. Transform your digital presence." />
+        <meta name="keywords" content="web design ireland, monaghan web developer, 3d website design, nextjs developer, react agency, high performance websites" />
+        <link rel="canonical" href="https://onyxandcode.com/" />
+      </Helmet>
+
       {/* Background Noise with higher contrast */}
       <div className="fixed inset-0 w-full h-full opacity-[0.03] pointer-events-none z-[9999] mix-blend-overlay"
         style={{ backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }}></div>
@@ -186,7 +194,7 @@ export default function App() {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-10 absolute left-1/2 -translate-x-1/2">
-          {['ABOUT', 'PROCESS', 'PORTFOLIO', 'CONTACT', 'LABS', 'PORTAL'].map((item) => (
+          {['ABOUT', 'PROCESS', 'PORTFOLIO', 'CONTACT', 'LABS'].map((item) => (
             <li key={item}>
               <a href={item === 'LABS' ? '/labs' : item === 'PORTAL' ? '/login' : `#${item.toLowerCase()}`} className="text-xs font-bold tracking-[2px] text-gray-400 md:hover:text-white transition-all duration-300 md:hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)] md:hover:scale-110 inline-block cursor-pointer">
                 {item}
@@ -222,7 +230,7 @@ export default function App() {
           ONYX <span className="text-gold-accent drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">&</span> CODE
         </div>
 
-        {['ABOUT', 'PROCESS', 'PORTFOLIO', 'CONTACT', 'LABS', 'PORTAL'].map((item) => (
+        {['ABOUT', 'PROCESS', 'PORTFOLIO', 'CONTACT', 'LABS'].map((item) => (
           <a
             key={item}
             href={item === 'LABS' ? '/labs' : item === 'PORTAL' ? '/login' : `#${item.toLowerCase()}`}
@@ -238,7 +246,9 @@ export default function App() {
       <div className="fixed inset-0 z-0 pointer-events-none">
         {/* Mobile: Centered. Desktop: Right Side */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[60vh] md:top-0 md:left-auto md:right-0 md:translate-x-0 md:translate-y-0 md:w-1/2 md:h-full">
-          <Scene3D />
+          <Suspense fallback={null}>
+            <Scene3D />
+          </Suspense>
         </div>
       </div>
 

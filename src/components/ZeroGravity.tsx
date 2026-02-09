@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import Matter from 'matter-js';
 import gsap from 'gsap';
+import { Helmet } from 'react-helmet-async';
 
 const ZeroGravity = () => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -202,6 +203,12 @@ const ZeroGravity = () => {
 
     return (
         <div className="relative w-full h-screen bg-[#0a0a0a] overflow-hidden">
+            <Helmet>
+                <title>Zero-G Labs | Onyx & Code Experimental Physics</title>
+                <meta name="description" content="Enter Zero-G Labs: An interactive Matter.js physics playground demonstrating Onyx & Code's advanced frontend engineering capabilities." />
+                <link rel="canonical" href="https://onyxandcode.com/labs" />
+            </Helmet>
+
             {/* Grain Overlay */}
             <div className="fixed inset-0 opacity-[0.04] pointer-events-none z-50 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
 
