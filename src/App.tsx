@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 const Scene3D = lazy(() => import('./components/Scene3D'));
 import AgentChat from './components/AgentChat';
 import OnyxBadge from './components/OnyxBadge';
+import TypewriterText from './components/TypewriterText';
 import { insforge } from './lib/insforge';
 import { Helmet } from 'react-helmet-async';
 
@@ -263,10 +264,11 @@ export default function App() {
               <div className="overflow-hidden py-2">
                 <span className="line-inner block opacity-0">Architecting</span>
               </div>
-              <div className="overflow-hidden py-2">
-                <span className="line-inner block text-transparent bg-clip-text bg-gradient-to-r from-gold-accent to-white drop-shadow-[0_0_30px_rgba(212,175,55,0.15)] opacity-0">
-                  Digital Luxury.
-                </span>
+              <div className="overflow-hidden py-2 min-h-[1.2em]">
+                <TypewriterText
+                  strings={['Luxury Websites', 'Web Design', 'Brands', '3D Experiences', 'Animations']}
+                  className="line-inner inline-block text-transparent bg-clip-text bg-gradient-to-r from-gold-accent to-white drop-shadow-[0_0_30px_rgba(212,175,55,0.15)]"
+                />
               </div>
             </h1>
 

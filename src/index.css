@@ -73,3 +73,21 @@ body {
   overflow-x: hidden;
   background-color: var(--color-onyx);
 }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0f0f0f;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 4px;
+}
+
+/* Typed.js Cursor */
+.typed-cursor {
+  color: #d4af37;
+  font-weight: 300;
+}

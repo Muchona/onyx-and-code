@@ -20,7 +20,7 @@ The Developer agrees to design and build a website for the Client as per the agr
 
 ## 2. Payment Terms
 The total project fee is **€[AMOUNT]**.
-*   **Deposit:** A non-refundable deposit of **[50%]** is required to commence work.
+*   **Deposit:** A non-refundable deposit of **[30%]** is required to commence work.
 *   **Final Payment:** The remaining balance is due upon completion and prior to the final transfer of website files/credentials.
 
 ## 3. Intellectual Property & Ownership
