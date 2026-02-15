@@ -176,7 +176,7 @@ export default function App() {
     <div className="bg-onyx text-white font-sans min-h-screen selection:bg-gold-accent selection:text-black overflow-hidden">
       <Helmet>
         <title>Onyx & Code | High-Performance Web Development Agency Ireland</title>
-        <meta name="description" content="Onyx & Code: Monaghan-based digital architects building premium 3D websites, e-commerce platforms, and scalable web applications. Transform your digital presence." />
+        <meta name="description" content="Onyx & Code: Premier Web Design in Monaghan, Ireland. We build high-performance 3D websites, e-commerce platforms, and scalable software. Local expertise, global standards." />
         <meta name="keywords" content="web design ireland, monaghan web developer, 3d website design, nextjs developer, react agency, high performance websites" />
         <link rel="canonical" href="https://onyxandcode.com/" />
       </Helmet>
