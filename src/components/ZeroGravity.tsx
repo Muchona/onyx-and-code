@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Matter from 'matter-js';
 import gsap from 'gsap';
 import { Helmet } from 'react-helmet-async';
@@ -6,6 +7,7 @@ import { Helmet } from 'react-helmet-async';
 const ZeroGravity = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const sceneRef = useRef<any>(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!containerRef.current) return;
@@ -223,7 +225,7 @@ const ZeroGravity = () => {
 
             <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-50">
                 <button
-                    onClick={() => window.location.href = '/'}
+                    onClick={() => navigate('/')}
                     className="px-8 py-3 bg-white/5 border border-white/10 text-white font-mono text-xs tracking-widest uppercase hover:bg-white/10 transition-colors rounded-full backdrop-blur-md"
                 >
                     Return to Base

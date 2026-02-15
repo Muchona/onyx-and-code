@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import gsap from 'gsap';
 
 export default function Success() {
@@ -15,6 +16,10 @@ export default function Success() {
 
     return (
         <div className="min-h-screen w-full bg-onyx text-white font-sans flex items-center justify-center p-6 relative overflow-hidden">
+            <Helmet>
+                <title>Protocol Initialized | Onyx & Code</title>
+                <meta name="robots" content="noindex" />
+            </Helmet>
             {/* Background Noise with higher contrast */}
             <div className="fixed inset-0 w-full h-full opacity-[0.03] pointer-events-none z-[9999] mix-blend-overlay"
                 style={{ backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }}></div>
