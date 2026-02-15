@@ -57,5 +57,18 @@ Errors are learning opportunities, not failures.
 
 ---
 
+## 4. Brand Signature (Mandatory)
+
+### The Onyx Badge
+Every project created under the Onyx & Code banner MUST include the **Onyx Badge** in the footer.
+*   **Position**: Bottom Right.
+*   **Content**:
+    *   **Logo**: "ONYX & CODE" (Onyx White, with "&" in Gold Accent).
+    *   **Subtext**: "DESIGNED AND BUILT BY WWW.ONYXANDCODE.COM" (Uppercase, tracking-widest).
+*   **Interaction**: Both the logo and the URL must link to `https://www.onyxandcode.com` in a new tab.
+*   **Implementation**: Use the standardized `OnyxBadge` component.
+
+---
+
 ## Summary
 **Agent A** builds the Stage. **Agent B** brings it to Life. **The Protocol** ensures we get smarter with every step.

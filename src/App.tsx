@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 const Scene3D = lazy(() => import('./components/Scene3D'));
 import AgentChat from './components/AgentChat';
+import OnyxBadge from './components/OnyxBadge';
 import { insforge } from './lib/insforge';
 import { Helmet } from 'react-helmet-async';
 
@@ -36,7 +37,7 @@ export default function App() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const { data, error } = await insforge.database
+        const { data } = await insforge.database
           .from('projects')
           .select('*')
           .order('created_at', { ascending: true });
@@ -733,13 +734,25 @@ export default function App() {
         </div>
 
         {/* Footer */}
-        <footer className="border-t border-white/10 py-12 text-center bg-onyx-light/30">
-          <p className="text-gray-600 text-xs font-mono tracking-widest uppercase mb-2">
-            © {new Date().getFullYear()} ONYX & CODE — WEB DEVELOPMENT & DESIGN — MONAGHAN, IRELAND.
-          </p>
-          <p className="text-gray-700 text-[10px] tracking-widest opacity-50">
-            SECURED BY ANTIGRAVITY
-          </p>
+        <footer className="border-t border-white/10 py-12 bg-onyx-light/30 relative overflow-hidden">
+          <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-8">
+
+            {/* Left: Copyright & Security (Original Content) */}
+            <div className="text-center md:text-left flex flex-col gap-2">
+              <p className="text-gray-600 text-xs font-mono tracking-widest uppercase">
+                © {new Date().getFullYear()} ONYX & CODE — MONAGHAN, IRELAND.
+              </p>
+              <p className="text-gray-700 text-[10px] tracking-widest opacity-50">
+                SECURED BY ANTIGRAVITY
+              </p>
+            </div>
+
+            {/* Right: The Badge */}
+            <div className="relative z-10">
+              <OnyxBadge />
+            </div>
+
+          </div>
         </footer>
 
         <AgentChat />

@@ -7,6 +7,7 @@ description: Initialize the Onyx Team Protocol (Antigravity + Agent A + Agent B)
 1.  **System Check**:
     *   Assess project structure.
     *   Verify existence of `design_system.md`. If missing, flagging it for creation by Agent A.
+    *   **Verify Brand Signature**: Ensure `OnyxBadge` component exists and is implemented in the footer (Bottom Right).
     *   Verify 3D environment readiness (e.g., `Scene3D.tsx`, installed dependencies like `three`, `@react-three/fiber`).
 
 2.  **Agent Assembly**:
