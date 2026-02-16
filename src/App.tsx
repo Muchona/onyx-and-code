@@ -12,6 +12,37 @@ import { Helmet } from 'react-helmet-async';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
+  // Business Hours Logic
+  const getSystemStatus = () => {
+    const now = new Date();
+    const day = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 5 = Friday, 6 = Saturday
+    const hour = now.getHours();
+    const minutes = now.getMinutes();
+    const currentTime = hour + minutes / 60;
+
+    const schedule = [
+      { open: 12, close: 18 }, // Sun (0)
+      { open: 10, close: 20 }, // Mon (1)
+      { open: 9, close: 20 },  // Tue (2)
+      { open: 10, close: 20 }, // Wed (3)
+      { open: 9, close: 20 },  // Thu (4)
+      { open: null, close: null }, // Fri (5)
+      { open: 12, close: 20 }  // Sat (6)
+    ];
+
+    const today = schedule[day];
+
+    if (today.open === null) return { status: 'OFFLINE', color: 'text-red-500', dot: 'bg-red-500' };
+
+    if (currentTime >= today.open && currentTime < today.close) {
+      return { status: 'OPERATIONAL', color: 'text-green-500', dot: 'bg-green-500' };
+    }
+
+    return { status: 'STANDBY', color: 'text-amber-500', dot: 'bg-amber-500' };
+  };
+
+  const systemStatus = getSystemStatus();
+
   const heroRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
 
@@ -30,6 +61,7 @@ export default function App() {
     live_url: string;
     has_3d: boolean;
     demo_url?: string;
+    created_at?: string;
   }
 
   const [projects, setProjects] = useState<Project[]>([]);
@@ -44,7 +76,19 @@ export default function App() {
           .order('created_at', { ascending: true });
 
         if (data) {
-          setProjects(data as Project[]);
+          const sortedProjects = [...(data as Project[])].sort((a, b) => {
+            // Priority 1: Gray Solicitors
+            if (a.name === 'Gray Solicitors') return -1;
+            if (b.name === 'Gray Solicitors') return 1;
+
+            // Priority 2: B3D Designs
+            if (a.name === 'B3D Designs') return -1;
+            if (b.name === 'B3D Designs') return 1;
+
+            // Default: newest first using created_at
+            return new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime();
+          });
+          setProjects(sortedProjects);
         }
       } catch (err) {
         console.error('Error fetching projects:', err);
@@ -648,6 +692,130 @@ export default function App() {
                 >
                   Contact sales
                 </button>
+              </div>
+            </div>
+          </section>
+
+          {/* Visit Us Section (Inspired by Jimmy's Bar) */}
+          <section id="visit" className="py-24 md:py-32 bg-onyx/50 border-y border-white/5 relative overflow-hidden">
+            {/* Background geometric accents */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold-accent/5 blur-[120px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/2"></div>
+
+            <div className="container mx-auto px-6 md:px-12 relative z-10">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+                {/* Left: Content */}
+                <div className="flex flex-col gap-10 lg:pr-12">
+                  <div>
+                    <div className="flex items-center gap-3 mb-6">
+                      <span className="font-mono text-xs text-gold-accent opacity-80 tracking-[4px] uppercase">
+                        // VISIT_US
+                      </span>
+                      <div className="h-[1px] w-12 bg-gold-accent/20"></div>
+                      <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10">
+                        <div className={`w-1.5 h-1.5 rounded-full ${systemStatus.dot} animate-pulse`}></div>
+                        <span className={`text-[10px] font-mono font-bold tracking-widest ${systemStatus.color}`}>
+                          SYSTEM_{systemStatus.status}
+                        </span>
+                      </div>
+                    </div>
+                    <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter leading-tight mb-6 drop-shadow-2xl">
+                      Your Transformation<br />Starts Here
+                    </h2>
+                    <p className="text-gray-400 max-w-md leading-relaxed text-lg">
+                      Located in the heart of Monaghan. Our digital laboratory is where luxury meets logic.
+                      Drop by or initialize a virtual protocol.
+                    </p>
+                  </div>
+
+                  {/* Info Cards Row */}
+                  <div className="flex flex-col gap-6">
+                    {/* Location Card */}
+                    <div className="flex gap-6 items-start">
+                      <div className="w-12 h-12 bg-onyx-light border border-white/10 rounded-xl flex items-center justify-center shrink-0 shadow-lg">
+                        <svg className="w-6 h-6 text-gold-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="text-white font-bold mb-1 tracking-tight">Location</h4>
+                        <p className="text-gray-400 text-sm leading-relaxed">
+                          20 Dr Mckenna Terrace, Connolly Park,<br />
+                          Monaghan, Co. Monaghan, H18 ET72
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Hours Card */}
+                    <div className="flex gap-6 items-start group/card">
+                      <div className="w-12 h-12 bg-onyx-light border border-white/10 rounded-xl flex items-center justify-center shrink-0 shadow-lg group-hover/card:border-gold-accent/40 transition-colors">
+                        <svg className="w-6 h-6 text-gold-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                      <div className="w-full">
+                        <h4 className="text-white font-bold mb-1 tracking-tight">System Operational Hours</h4>
+                        <div className="grid grid-cols-2 gap-x-12 gap-y-1.5 text-xs">
+                          <span className="text-gray-500 font-mono tracking-tighter uppercase">MON, WED:</span> <span className="text-gray-300">10AM - 8PM</span>
+                          <span className="text-gray-500 font-mono tracking-tighter uppercase">TUE, THU:</span> <span className="text-gray-300">9AM - 8PM</span>
+                          <span className="text-gray-500 font-mono tracking-tighter uppercase">FRI:</span> <span className="text-red-400 font-bold tracking-widest">OFFLINE</span>
+                          <span className="text-gray-500 font-mono tracking-tighter uppercase">SAT:</span> <span className="text-gray-300">12PM - 8PM</span>
+                          <span className="text-gray-500 font-mono tracking-tighter uppercase">SUN:</span> <span className="text-gray-300">12PM - 6PM</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Contact Card */}
+                    <div className="flex gap-6 items-start group/card">
+                      <div className="w-12 h-12 bg-onyx-light border border-white/10 rounded-xl flex items-center justify-center shrink-0 shadow-lg group-hover/card:border-gold-accent/40 transition-colors">
+                        <svg className="w-6 h-6 text-gold-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="text-white font-bold mb-1 tracking-tight">Contact Initialization</h4>
+                        <a href="mailto:mamikon@onyxandcode.com" className="text-gray-400 text-sm mb-6 font-mono tracking-tight hover:text-gold-accent transition-colors block italic w-fit">
+                          mamikon@onyxandcode.com
+                        </a>
+
+                        {/* Social Links matching reference style */}
+                        <div className="flex gap-4">
+                          {/* Instagram */}
+                          <a href="https://www.instagram.com/onyxandcod/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center hover:bg-pink-500/20 hover:scale-110 transition-all shadow-lg shadow-pink-500/5 group">
+                            <svg className="w-5 h-5 text-pink-500" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.805.249 2.227.412.56.216.96.475 1.382.897.422.422.68.822.897 1.382.163.422.358 1.057.412 2.227.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.249 1.805-.412 2.227-.216.56-.475.96-.897 1.382-.422.422-.822.68-1.382.897-.422.163-1.057.358-2.227.412-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.805-.249-2.227-.412-.56-.216-.96-.475-1.382-.897-.422-.422-.68-.822-.897-1.382-.163-.422-.358-1.057-.412-2.227-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.054-1.17.249-1.805.412-2.227.216-.56.475-.96.897-1.382.422-.422.822-.68 1.382-.897.422-.163 1.057-.358 2.227-.412 1.266-.058 1.646-.07 4.85-.07m0-2.163c-3.259 0-3.667.014-4.947.072-1.277.057-2.148.258-2.911.556-.791.306-1.461.714-2.128 1.383-.669.667-1.077 1.337-1.383 2.129-.297.763-.499 1.634-.556 2.91-.058 1.28-.071 1.688-.071 4.948s.013 3.668.071 4.948c.057 1.276.258 2.147.556 2.911.306.791.714 1.461 1.383 2.128.667.668 1.337 1.076 2.129 1.382.763.297 1.634.499 2.91.556 1.28.059 1.688.071 4.948.071s3.668-.013 4.948-.071c1.276-.057 2.147-.258 2.911-.556.791-.306 1.461-.714 2.128-1.383.668-.667 1.076-1.337 1.382-2.129.297-.763.499-1.634.556-2.91.059-1.28.071-1.688.071-4.948s-.013-3.668-.071-4.948c-.057-1.276-.258-2.147-.556-2.911-.306-.791-.714-1.461-1.383-2.128-.667-.669-1.337-1.077-2.129-1.383-.763-.297-1.634-.499-2.91-.556-1.28-.058-1.688-.071-4.948-.071z" />
+                              <path d="M12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.441s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.441-1.441-1.441z" />
+                            </svg>
+                          </a>
+                          {/* LinkedIn */}
+                          <a href="https://www.linkedin.com/in/mamikon-hovhannisyan-b18153175/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center hover:bg-blue-500/20 hover:scale-110 transition-all shadow-lg shadow-blue-500/5 group">
+                            <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right: Map Embed with Premium Framing */}
+                <div className="relative group/map">
+                  {/* Decorative frame elements */}
+                  <div className="absolute -inset-4 border border-white/5 rounded-[40px] pointer-events-none group-hover/map:border-gold-accent/20 transition-colors duration-500"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-tr from-gold-accent/30 to-transparent blur-3xl opacity-20 group-hover/map:opacity-40 transition-opacity duration-700 rounded-[35px]"></div>
+
+                  <div className="relative aspect-square md:aspect-video lg:aspect-square w-full rounded-[30px] overflow-hidden border border-white/10 shadow-2xl bg-onyx-light ring-1 ring-white/5">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2380.643610996845!2d-6.9683!3d54.2492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x485e2b0000000001%3A0x0!2s20%20Dr%20Mckenna%20Terrace%2C%20Connolly%20Park%2C%20Monaghan!5e0!3m2!1sen!2sie!4v1700000000000!5m2!1sen!2sie&q=20+Dr+Mckenna+Terrace+Monaghan+Ireland"
+                      className="w-full h-full opacity-90 hover:opacity-100 transition-opacity duration-500 saturate-[0.8] contrast-[1.1]"
+                      loading="lazy"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                </div>
+
               </div>
             </div>
           </section>
