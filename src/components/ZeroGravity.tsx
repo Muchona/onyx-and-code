@@ -208,7 +208,7 @@ const ZeroGravity = () => {
             <Helmet>
                 <title>Zero-G Labs | Onyx & Code Experimental Physics</title>
                 <meta name="description" content="Enter Zero-G Labs: An interactive Matter.js physics playground demonstrating Onyx & Code's advanced frontend engineering capabilities." />
-                <link rel="canonical" href="https://onyxandcode.com/labs" />
+                <link rel="canonical" href="https://www.onyxandcode.com/labs" />
             </Helmet>
 
             {/* Grain Overlay */}

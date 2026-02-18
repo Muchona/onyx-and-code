@@ -222,7 +222,7 @@ export default function App() {
         <title>Onyx & Code | High-Performance Web Development Agency Ireland</title>
         <meta name="description" content="Onyx & Code: Premier Web Design in Monaghan, Ireland. We build high-performance 3D websites, e-commerce platforms, and scalable software. Local expertise, global standards." />
         <meta name="keywords" content="web design ireland, monaghan web developer, 3d website design, nextjs developer, react agency, high performance websites" />
-        <link rel="canonical" href="https://onyxandcode.com/" />
+        <link rel="canonical" href="https://www.onyxandcode.com/" />
       </Helmet>
 
       {/* Background Noise with higher contrast */}

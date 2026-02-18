@@ -5,5 +5,18 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "onyxandcode.com"
+        }
+      ],
+      "destination": "https://www.onyxandcode.com/:path*",
+      "permanent": true
+    }
   ]
 }

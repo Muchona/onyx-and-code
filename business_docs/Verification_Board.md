@@ -13,7 +13,7 @@
 ---
 
 ![Onyx & Code Logo](../public/favicon.png)
-
+![alt text](image.png)
 ---
 
 > [!IMPORTANT]

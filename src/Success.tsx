@@ -19,6 +19,7 @@ export default function Success() {
             <Helmet>
                 <title>Protocol Initialized | Onyx & Code</title>
                 <meta name="robots" content="noindex" />
+                <link rel="canonical" href="https://www.onyxandcode.com/success" />
             </Helmet>
             {/* Background Noise with higher contrast */}
             <div className="fixed inset-0 w-full h-full opacity-[0.03] pointer-events-none z-[9999] mix-blend-overlay"
