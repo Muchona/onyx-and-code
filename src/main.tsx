@@ -14,6 +14,12 @@ console.log('VITE BASE_URL:', import.meta.env.BASE_URL);
 
 console.log('VITE BASE_URL:', import.meta.env.BASE_URL);
 
+// --- 301 REDIRECT ENFORCER (Client-Side Fallback) ---
+if (window.location.hostname === 'onyxandcode.com') {
+  const newUrl = 'https://www.onyxandcode.com' + window.location.pathname + window.location.search;
+  window.location.replace(newUrl);
+}
+
 // @ts-ignore
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
