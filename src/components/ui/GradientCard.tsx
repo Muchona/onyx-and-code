@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 interface GradientCardProps {
@@ -12,25 +12,28 @@ export const GradientCard = ({ children, className, containerClassName }: Gradie
     const cardRef = useRef<HTMLDivElement>(null);
     const [isHovered, setIsHovered] = useState(false);
     const [rotation, setRotation] = useState({ x: 0, y: 0 });
+    const [isMobile, setIsMobile] = useState(false);
 
-    // Handle mouse movement for 3D effect
+    // Detect mobile on mount
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    // Handle mouse movement for 3D effect (desktop only)
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (cardRef.current) {
-            const rect = cardRef.current.getBoundingClientRect();
-
-            // Calculate mouse position relative to card center
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-
-            // Calculate rotation (limited range for subtle effect)
-            const rotateX = -(y / rect.height) * 5; // Max 5 degrees rotation
-            const rotateY = (x / rect.width) * 5; // Max 5 degrees rotation
-
-            setRotation({ x: rotateX, y: rotateY });
-        }
+        if (isMobile || !cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        setRotation({
+            x: -(y / rect.height) * 5,
+            y: (x / rect.width) * 5,
+        });
     };
 
-    // Reset rotation when not hovering
     const handleMouseLeave = () => {
         setIsHovered(false);
         setRotation({ x: 0, y: 0 });
@@ -39,21 +42,23 @@ export const GradientCard = ({ children, className, containerClassName }: Gradie
     return (
         <div
             className={containerClassName}
-            onMouseEnter={() => setIsHovered(true)}
+            onMouseEnter={() => !isMobile && setIsHovered(true)}
             onMouseLeave={handleMouseLeave}
             onMouseMove={handleMouseMove}
         >
-            {/* Card container with realistic 3D effect */}
+            {/* Card container — 3D only on desktop */}
             <motion.div
                 ref={cardRef}
-                className={`relative rounded-[32px] overflow-hidden h-full ${className || ''}`}
+                className={`relative rounded-2xl md:rounded-[32px] overflow-hidden h-full border border-white/10 ${className || ''}`}
                 style={{
-                    transformStyle: "preserve-3d",
+                    transformStyle: isMobile ? "flat" : "preserve-3d",
                     backgroundColor: "#0a0a0a",
-                    boxShadow: "0 -10px 100px 10px rgba(212, 175, 55, 0.15), 0 0 10px 0 rgba(0, 0, 0, 0.5)",
+                    boxShadow: isMobile
+                        ? "0 0 30px 5px rgba(212, 175, 55, 0.08)"
+                        : "0 -10px 100px 10px rgba(212, 175, 55, 0.15), 0 0 10px 0 rgba(0, 0, 0, 0.5)",
                 }}
                 initial={{ y: 0 }}
-                animate={{
+                animate={isMobile ? {} : {
                     y: isHovered ? -5 : 0,
                     rotateX: rotation.x,
                     rotateY: rotation.y,
@@ -65,164 +70,127 @@ export const GradientCard = ({ children, className, containerClassName }: Gradie
                     damping: 20
                 }}
             >
-                {/* Subtle glass reflection overlay */}
-                <motion.div
-                    className="absolute inset-0 z-[35] pointer-events-none"
-                    style={{
-                        background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 80%, rgba(255,255,255,0.05) 100%)",
-                        backdropFilter: "blur(2px)",
-                    }}
-                    animate={{
-                        opacity: isHovered ? 0.7 : 0.5,
-                        rotateX: -rotation.x * 0.2,
-                        rotateY: -rotation.y * 0.2,
-                        z: 1,
-                    }}
-                    transition={{
-                        duration: 0.4,
-                        ease: "easeOut"
-                    }}
-                />
+                {/* Glass reflection overlay — desktop only */}
+                {!isMobile && (
+                    <motion.div
+                        className="absolute inset-0 z-[35] pointer-events-none"
+                        style={{
+                            background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 80%, rgba(255,255,255,0.05) 100%)",
+                            backdropFilter: "blur(2px)",
+                        }}
+                        animate={{
+                            opacity: isHovered ? 0.7 : 0.5,
+                            rotateX: -rotation.x * 0.2,
+                            rotateY: -rotation.y * 0.2,
+                            z: 1,
+                        }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                    />
+                )}
 
-                {/* Dark background with black gradient */}
-                <motion.div
+                {/* Dark background */}
+                <div
                     className="absolute inset-0 z-0"
+                    style={{ background: "linear-gradient(180deg, #000000 0%, #050505 100%)" }}
+                />
+
+                {/* Noise texture — reduced opacity on mobile for performance */}
+                <div
+                    className="absolute inset-0 opacity-[0.15] md:opacity-30 mix-blend-overlay z-10 pointer-events-none"
                     style={{
-                        background: "linear-gradient(180deg, #000000 0%, #000000 70%)",
-                    }}
-                    animate={{
-                        z: -1
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
                     }}
                 />
 
-                {/* Noise texture overlay */}
-                <motion.div
-                    className="absolute inset-0 opacity-30 mix-blend-overlay z-10"
+                {/* Smudge texture — desktop only (expensive filter) */}
+                {!isMobile && (
+                    <div
+                        className="absolute inset-0 opacity-10 mix-blend-soft-light z-[11] pointer-events-none"
+                        style={{
+                            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='smudge'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.01' numOctaves='3' seed='5' stitchTiles='stitch'/%3E%3CfeGaussianBlur stdDeviation='10'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23smudge)'/%3E%3C/svg%3E")`,
+                            backdropFilter: "blur(1px)",
+                        }}
+                    />
+                )}
+
+                {/* Gold glow — simplified on mobile (single gradient, lighter blur) */}
+                <div
+                    className="absolute bottom-0 left-0 right-0 h-1/2 md:h-2/3 z-20 pointer-events-none"
                     style={{
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-                    }}
-                    animate={{
-                        z: -0.5
+                        background: isMobile
+                            ? "radial-gradient(ellipse at bottom center, rgba(212, 175, 55, 0.35) 0%, rgba(180, 140, 30, 0) 70%)"
+                            : `radial-gradient(ellipse at bottom right, rgba(212, 175, 55, 0.6) -10%, rgba(180, 140, 30, 0) 70%),
+                               radial-gradient(ellipse at bottom left, rgba(245, 200, 80, 0.5) -10%, rgba(180, 140, 30, 0) 70%)`,
+                        filter: isMobile ? "blur(25px)" : "blur(40px)",
                     }}
                 />
 
-                {/* Subtle finger smudge texture for realism */}
-                <motion.div
-                    className="absolute inset-0 opacity-10 mix-blend-soft-light z-[11] pointer-events-none"
-                    style={{
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='smudge'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.01' numOctaves='3' seed='5' stitchTiles='stitch'/%3E%3CfeGaussianBlur stdDeviation='10'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23smudge)'/%3E%3C/svg%3E")`,
-                        backdropFilter: "blur(1px)",
-                    }}
-                    animate={{
-                        z: -0.25
-                    }}
-                />
+                {/* Central gold glow — desktop only */}
+                {!isMobile && (
+                    <motion.div
+                        className="absolute bottom-0 left-0 right-0 h-2/3 z-[21]"
+                        style={{
+                            background: "radial-gradient(circle at bottom center, rgba(212, 175, 55, 0.6) -20%, rgba(180, 140, 30, 0) 60%)",
+                            filter: "blur(45px)",
+                        }}
+                        animate={{
+                            opacity: isHovered ? 0.85 : 0.75,
+                            y: isHovered ? `calc(10% + ${rotation.x * 0.3}px)` : "10%",
+                            z: 0
+                        }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                    />
+                )}
 
-                {/* Gold glow effect */}
-                <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-2/3 z-20"
+                {/* Bottom border glow */}
+                <div
+                    className="absolute bottom-0 left-0 right-0 h-[1px] md:h-[2px] z-[25] pointer-events-none"
                     style={{
-                        background: `
-              radial-gradient(ellipse at bottom right, rgba(212, 175, 55, 0.6) -10%, rgba(180, 140, 30, 0) 70%),
-              radial-gradient(ellipse at bottom left, rgba(245, 200, 80, 0.5) -10%, rgba(180, 140, 30, 0) 70%)
-            `,
-                        filter: "blur(40px)",
-                    }}
-                    animate={{
-                        opacity: isHovered ? 0.9 : 0.8,
-                        y: isHovered ? rotation.x * 0.5 : 0,
-                        z: 0
-                    }}
-                    transition={{
-                        duration: 0.4,
-                        ease: "easeOut"
-                    }}
-                />
-
-                {/* Central gold glow */}
-                <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-2/3 z-[21]"
-                    style={{
-                        background: `
-              radial-gradient(circle at bottom center, rgba(212, 175, 55, 0.6) -20%, rgba(180, 140, 30, 0) 60%)
-            `,
-                        filter: "blur(45px)",
-                    }}
-                    animate={{
-                        opacity: isHovered ? 0.85 : 0.75,
-                        y: isHovered ? `calc(10% + ${rotation.x * 0.3}px)` : "10%",
-                        z: 0
-                    }}
-                    transition={{
-                        duration: 0.4,
-                        ease: "easeOut"
-                    }}
-                />
-
-                {/* Enhanced bottom border glow */}
-                <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-[2px] z-[25]"
-                    style={{
-                        background: "linear-gradient(90deg, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0.7) 50%, rgba(212, 175, 55, 0.05) 100%)",
-                    }}
-                    animate={{
-                        boxShadow: isHovered
-                            ? "0 0 20px 4px rgba(212, 175, 55, 0.9), 0 0 30px 6px rgba(180, 140, 30, 0.7), 0 0 40px 8px rgba(245, 200, 80, 0.5)"
+                        background: "linear-gradient(90deg, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0.5) 50%, rgba(212, 175, 55, 0.05) 100%)",
+                        boxShadow: isMobile
+                            ? "0 0 10px 2px rgba(212, 175, 55, 0.4)"
                             : "0 0 15px 3px rgba(212, 175, 55, 0.8), 0 0 25px 5px rgba(180, 140, 30, 0.6), 0 0 35px 7px rgba(245, 200, 80, 0.4)",
-                        opacity: isHovered ? 1 : 0.9,
-                        z: 0.5
-                    }}
-                    transition={{
-                        duration: 0.4,
-                        ease: "easeOut"
                     }}
                 />
-                {/* Left edge glow */}
-                <motion.div
-                    className="absolute bottom-0 left-0 h-1/4 w-[1px] z-[25] rounded-full"
-                    style={{
-                        background: "linear-gradient(to top, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.5) 20%, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.1) 60%, rgba(255, 255, 255, 0) 80%)",
-                    }}
-                    animate={{
-                        boxShadow: isHovered
-                            ? "0 0 20px 4px rgba(212, 175, 55, 0.9), 0 0 30px 6px rgba(180, 140, 30, 0.7), 0 0 40px 8px rgba(245, 200, 80, 0.5)"
-                            : "0 0 15px 3px rgba(212, 175, 55, 0.8), 0 0 25px 5px rgba(180, 140, 30, 0.6), 0 0 35px 7px rgba(245, 200, 80, 0.4)",
-                        opacity: isHovered ? 1 : 0.9,
-                        z: 0.5
-                    }}
-                    transition={{
-                        duration: 0.4,
-                        ease: "easeOut"
-                    }}
-                />
-                {/* Right edge glow */}
-                <motion.div
-                    className="absolute bottom-0 right-0 h-1/4 w-[1px] z-[25] rounded-full"
-                    style={{
-                        background: "linear-gradient(to top, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.5) 20%, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.1) 60%, rgba(255, 255, 255, 0) 80%)",
-                    }}
-                    animate={{
-                        boxShadow: isHovered
-                            ? "0 0 20px 4px rgba(212, 175, 55, 0.9), 0 0 30px 6px rgba(180, 140, 30, 0.7), 0 0 40px 8px rgba(245, 200, 80, 0.5)"
-                            : "0 0 15px 3px rgba(212, 175, 55, 0.8), 0 0 25px 5px rgba(180, 140, 30, 0.6), 0 0 35px 7px rgba(245, 200, 80, 0.4)",
-                        opacity: isHovered ? 1 : 0.9,
-                        z: 0.5
-                    }}
-                    transition={{
-                        duration: 0.4,
-                        ease: "easeOut"
-                    }}
-                />
+
+                {/* Edge glows — desktop only */}
+                {!isMobile && (
+                    <>
+                        <motion.div
+                            className="absolute bottom-0 left-0 h-1/4 w-[1px] z-[25] rounded-full"
+                            style={{
+                                background: "linear-gradient(to top, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.5) 20%, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.1) 60%, rgba(255, 255, 255, 0) 80%)",
+                            }}
+                            animate={{
+                                boxShadow: isHovered
+                                    ? "0 0 20px 4px rgba(212, 175, 55, 0.9), 0 0 30px 6px rgba(180, 140, 30, 0.7), 0 0 40px 8px rgba(245, 200, 80, 0.5)"
+                                    : "0 0 15px 3px rgba(212, 175, 55, 0.8), 0 0 25px 5px rgba(180, 140, 30, 0.6), 0 0 35px 7px rgba(245, 200, 80, 0.4)",
+                                opacity: isHovered ? 1 : 0.9,
+                                z: 0.5
+                            }}
+                            transition={{ duration: 0.4, ease: "easeOut" }}
+                        />
+                        <motion.div
+                            className="absolute bottom-0 right-0 h-1/4 w-[1px] z-[25] rounded-full"
+                            style={{
+                                background: "linear-gradient(to top, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.5) 20%, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.1) 60%, rgba(255, 255, 255, 0) 80%)",
+                            }}
+                            animate={{
+                                boxShadow: isHovered
+                                    ? "0 0 20px 4px rgba(212, 175, 55, 0.9), 0 0 30px 6px rgba(180, 140, 30, 0.7), 0 0 40px 8px rgba(245, 200, 80, 0.5)"
+                                    : "0 0 15px 3px rgba(212, 175, 55, 0.8), 0 0 25px 5px rgba(180, 140, 30, 0.6), 0 0 35px 7px rgba(245, 200, 80, 0.4)",
+                                opacity: isHovered ? 1 : 0.9,
+                                z: 0.5
+                            }}
+                            transition={{ duration: 0.4, ease: "easeOut" }}
+                        />
+                    </>
+                )}
 
                 {/* Card content */}
-                <motion.div
-                    className="relative flex flex-col h-full p-8 z-40"
-                    animate={{
-                        z: 2
-                    }}
-                >
+                <div className="relative flex flex-col h-full p-6 md:p-8 z-40">
                     {children}
-                </motion.div>
+                </div>
             </motion.div>
         </div>
     );
