@@ -8,6 +8,7 @@ import OnyxBadge from './components/OnyxBadge';
 import TypewriterText from './components/TypewriterText';
 import { insforge } from './lib/insforge';
 import { Helmet } from 'react-helmet-async';
+import GlowCard from './components/ui/GlowCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -77,13 +78,25 @@ export default function App() {
 
         if (data) {
           const sortedProjects = [...(data as Project[])].sort((a, b) => {
-            // Priority 1: Gray Solicitors
+            // Priority 1: Slice of Italy
+            if (a.name === 'Slice of Italy') return -1;
+            if (b.name === 'Slice of Italy') return 1;
+
+            // Priority 2: Roberto's Coffee
+            if (a.name === "Roberto's Coffee") return -1;
+            if (b.name === "Roberto's Coffee") return 1;
+
+            // Priority 3: Gray Solicitors
             if (a.name === 'Gray Solicitors') return -1;
             if (b.name === 'Gray Solicitors') return 1;
 
-            // Priority 2: B3D Designs
+            // Priority 4: B3D Designs
             if (a.name === 'B3D Designs') return -1;
             if (b.name === 'B3D Designs') return 1;
+
+            // Priority 5: Fro & Co Coffeehouse
+            if (a.name === 'Fro & Co Coffeehouse') return -1;
+            if (b.name === 'Fro & Co Coffeehouse') return 1;
 
             // Default: newest first using created_at
             return new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime();
@@ -458,48 +471,50 @@ export default function App() {
                 ))
               ) : (
                 projects.map((project) => (
-                  <div key={project.id} className="project-card group block">
-                    <a href={project.live_url} target="_blank" rel="noopener noreferrer" className="block relative">
-                      <div className="w-full aspect-video bg-onyx-light border border-white/10 rounded-2xl overflow-hidden mb-6 relative shadow-2xl transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(255,255,255,0.05)] group-hover:border-white/20">
-                        <div className="absolute inset-0 bg-gold-accent/0 group-hover:bg-gold-accent/5 transition-colors duration-500 z-10"></div>
-                        <img
-                          src={project.image_url}
-                          alt={project.name}
-                          className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out grayscale group-hover:grayscale-0"
-                        />
+                  <GlowCard key={project.id} className="rounded-2xl">
+                    <div className="project-card group block h-full">
+                      <a href={project.live_url} target="_blank" rel="noopener noreferrer" className="block relative">
+                        <div className="w-full aspect-video bg-onyx-light border border-white/10 rounded-2xl overflow-hidden mb-6 relative shadow-2xl transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(255,255,255,0.05)] group-hover:border-white/20">
+                          <div className="absolute inset-0 bg-gold-accent/0 group-hover:bg-gold-accent/5 transition-colors duration-500 z-10"></div>
+                          <img
+                            src={project.image_url}
+                            alt={project.name}
+                            className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out grayscale group-hover:grayscale-0"
+                          />
 
-                        {/* 3D Badge if applicable */}
-                        {project.has_3d && (
-                          <div className="absolute top-4 right-4 z-20 bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full flex items-center gap-2">
-                            <div className="w-2 h-2 rounded-full bg-gold-accent animate-pulse"></div>
-                            <span className="text-[10px] font-bold tracking-widest text-white uppercase">3D Interactive</span>
-                          </div>
+                          {/* 3D Badge if applicable */}
+                          {project.has_3d && (
+                            <div className="absolute top-4 right-4 z-20 bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full flex items-center gap-2">
+                              <div className="w-2 h-2 rounded-full bg-gold-accent animate-pulse"></div>
+                              <span className="text-[10px] font-bold tracking-widest text-white uppercase">3D Interactive</span>
+                            </div>
+                          )}
+                        </div>
+                      </a>
+
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h3 className="text-2xl font-bold mb-2 group-hover:text-gold-accent transition-colors drop-shadow-md">
+                            <a href={project.live_url} target="_blank" rel="noopener noreferrer">{project.name}</a>
+                          </h3>
+                          <p className="text-gray-500 text-sm group-hover:text-gray-300 transition-colors mb-4">{project.description}</p>
+                        </div>
+
+                        {/* Quick Action for 3D Demo */}
+                        {project.has_3d && project.demo_url && (
+                          <button
+                            onClick={() => navigate(project.demo_url!)}
+                            className="hidden md:flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg hover:bg-gold-accent hover:text-black hover:border-gold-accent transition-all duration-300 group/btn"
+                          >
+                            <span className="text-[10px] font-bold tracking-widest uppercase">Launch Demo</span>
+                            <svg className="w-3 h-3 group-hover/btn:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                          </button>
                         )}
                       </div>
-                    </a>
-
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h3 className="text-2xl font-bold mb-2 group-hover:text-gold-accent transition-colors drop-shadow-md">
-                          <a href={project.live_url} target="_blank" rel="noopener noreferrer">{project.name}</a>
-                        </h3>
-                        <p className="text-gray-500 text-sm group-hover:text-gray-300 transition-colors mb-4">{project.description}</p>
-                      </div>
-
-                      {/* Quick Action for 3D Demo */}
-                      {project.has_3d && project.demo_url && (
-                        <button
-                          onClick={() => navigate(project.demo_url!)}
-                          className="hidden md:flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg hover:bg-gold-accent hover:text-black hover:border-gold-accent transition-all duration-300 group/btn"
-                        >
-                          <span className="text-[10px] font-bold tracking-widest uppercase">Launch Demo</span>
-                          <svg className="w-3 h-3 group-hover/btn:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                          </svg>
-                        </button>
-                      )}
                     </div>
-                  </div>
+                  </GlowCard>
                 ))
               )}
             </div>
