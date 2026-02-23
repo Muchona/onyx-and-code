@@ -9,6 +9,7 @@ import TypewriterText from './components/TypewriterText';
 import { insforge } from './lib/insforge';
 import { Helmet } from 'react-helmet-async';
 import GlowCard from './components/ui/GlowCard';
+import { SocialLinks } from './components/ui/SocialLinks';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -795,26 +796,14 @@ export default function App() {
                         </a>
 
                         {/* Social Links matching reference style */}
-                        <div className="flex gap-4">
-                          {/* Facebook */}
-                          <a href="https://www.facebook.com/onyxandcode" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-lg bg-blue-600/10 border border-blue-600/20 flex items-center justify-center hover:bg-blue-600/20 hover:scale-110 transition-all shadow-lg shadow-blue-600/5 group">
-                            <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                            </svg>
-                          </a>
-                          {/* Instagram */}
-                          <a href="https://www.instagram.com/onyxandcod/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center hover:bg-pink-500/20 hover:scale-110 transition-all shadow-lg shadow-pink-500/5 group">
-                            <svg className="w-5 h-5 text-pink-500" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.805.249 2.227.412.56.216.96.475 1.382.897.422.422.68.822.897 1.382.163.422.358 1.057.412 2.227.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.249 1.805-.412 2.227-.216.56-.475.96-.897 1.382-.422.422-.822.68-1.382.897-.422.163-1.057.358-2.227.412-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.805-.249-2.227-.412-.56-.216-.96-.475-1.382-.897-.422-.422-.68-.822-.897-1.382-.163-.422-.358-1.057-.412-2.227-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.054-1.17.249-1.805.412-2.227.216-.56.475-.96.897-1.382.422-.422.822-.68 1.382-.897.422-.163 1.057-.358 2.227-.412 1.266-.058 1.646-.07 4.85-.07m0-2.163c-3.259 0-3.667.014-4.947.072-1.277.057-2.148.258-2.911.556-.791.306-1.461.714-2.128 1.383-.669.667-1.077 1.337-1.383 2.129-.297.763-.499 1.634-.556 2.91-.058 1.28-.071 1.688-.071 4.948s.013 3.668.071 4.948c.057 1.276.258 2.147.556 2.911.306.791.714 1.461 1.383 2.128.667.668 1.337 1.076 2.129 1.382.763.297 1.634.499 2.91.556 1.28.059 1.688.071 4.948.071s3.668-.013 4.948-.071c1.276-.057 2.147-.258 2.911-.556.791-.306 1.461-.714 2.128-1.383.668-.667 1.076-1.337 1.382-2.129.297-.763.499-1.634.556-2.91.059-1.28.071-1.688.071-4.948s-.013-3.668-.071-4.948c-.057-1.276-.258-2.147-.556-2.911-.306-.791-.714-1.461-1.383-2.128-.667-.669-1.337-1.077-2.129-1.383-.763-.297-1.634-.499-2.91-.556-1.28-.058-1.688-.071-4.948-.071z" />
-                              <path d="M12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.441s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.441-1.441-1.441z" />
-                            </svg>
-                          </a>
-                          {/* LinkedIn */}
-                          <a href="https://www.linkedin.com/in/mamikon-hovhannisyan-b18153175/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center hover:bg-blue-500/20 hover:scale-110 transition-all shadow-lg shadow-blue-500/5 group">
-                            <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                            </svg>
-                          </a>
+                        <div className="flex justify-start">
+                          <SocialLinks
+                            socials={[
+                              { name: 'Facebook', image: '/social/facebook.png', url: 'https://www.facebook.com/onyxandcode' },
+                              { name: 'Instagram', image: '/social/instagram.png', url: 'https://www.instagram.com/onyxandcod/' },
+                              { name: 'LinkedIn', image: '/social/linkedin.png', url: 'https://www.linkedin.com/in/mamikon-hovhannisyan-b18153175/' },
+                            ]}
+                          />
                         </div>
                       </div>
                     </div>
