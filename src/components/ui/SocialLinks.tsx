@@ -46,7 +46,7 @@ export function SocialLinks({ socials, className, ...props }: SocialLinksProps) 
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cn(
-                        "relative cursor-pointer px-5 py-2 transition-opacity duration-200 block no-underline",
+                        "relative cursor-pointer px-3 py-1.5 transition-opacity duration-200 block no-underline",
                         hoveredSocial && hoveredSocial !== social.name
                             ? "opacity-50"
                             : "opacity-100"
@@ -61,7 +61,7 @@ export function SocialLinks({ socials, className, ...props }: SocialLinksProps) 
                         setClicked(true)
                     }}
                 >
-                    <span className="block text-lg font-medium text-white group-hover:text-gold-accent transition-colors">
+                    <span className="block text-sm font-medium text-white/70 group-hover:text-gold-accent transition-colors">
                         {social.name}
                     </span>
                     <AnimatePresence>
@@ -74,15 +74,15 @@ export function SocialLinks({ socials, className, ...props }: SocialLinksProps) 
                                     key={social.name}
                                     src={social.image}
                                     alt={social.name}
-                                    className="size-16"
+                                    className="size-10"
                                     initial={{
-                                        y: -40,
+                                        y: -25,
                                         rotate: rotation,
                                         opacity: 0,
                                         filter: "blur(2px)",
                                     }}
-                                    animate={{ y: -50, opacity: 1, filter: "blur(0px)" }}
-                                    exit={{ y: -40, opacity: 0, filter: "blur(2px)" }}
+                                    animate={{ y: -35, opacity: 1, filter: "blur(0px)" }}
+                                    exit={{ y: -25, opacity: 0, filter: "blur(2px)" }}
                                     transition={{ duration: 0.2 }}
                                 />
                             </motion.div>
