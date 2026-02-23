@@ -49,8 +49,8 @@ export const GradientCard = ({ children, className, containerClassName }: Gradie
                 className={`relative rounded-[32px] overflow-hidden h-full ${className || ''}`}
                 style={{
                     transformStyle: "preserve-3d",
-                    backgroundColor: "#0e131f",
-                    boxShadow: "0 -10px 100px 10px rgba(78, 99, 255, 0.25), 0 0 10px 0 rgba(0, 0, 0, 0.5)",
+                    backgroundColor: "#0a0a0a",
+                    boxShadow: "0 -10px 100px 10px rgba(212, 175, 55, 0.15), 0 0 10px 0 rgba(0, 0, 0, 0.5)",
                 }}
                 initial={{ y: 0 }}
                 animate={{
@@ -118,13 +118,13 @@ export const GradientCard = ({ children, className, containerClassName }: Gradie
                     }}
                 />
 
-                {/* Purple/blue glow effect */}
+                {/* Gold glow effect */}
                 <motion.div
                     className="absolute bottom-0 left-0 right-0 h-2/3 z-20"
                     style={{
                         background: `
-              radial-gradient(ellipse at bottom right, rgba(172, 92, 255, 0.7) -10%, rgba(79, 70, 229, 0) 70%),
-              radial-gradient(ellipse at bottom left, rgba(56, 189, 248, 0.7) -10%, rgba(79, 70, 229, 0) 70%)
+              radial-gradient(ellipse at bottom right, rgba(212, 175, 55, 0.6) -10%, rgba(180, 140, 30, 0) 70%),
+              radial-gradient(ellipse at bottom left, rgba(245, 200, 80, 0.5) -10%, rgba(180, 140, 30, 0) 70%)
             `,
                         filter: "blur(40px)",
                     }}
@@ -139,12 +139,12 @@ export const GradientCard = ({ children, className, containerClassName }: Gradie
                     }}
                 />
 
-                {/* Central purple glow */}
+                {/* Central gold glow */}
                 <motion.div
                     className="absolute bottom-0 left-0 right-0 h-2/3 z-[21]"
                     style={{
                         background: `
-              radial-gradient(circle at bottom center, rgba(161, 58, 229, 0.7) -20%, rgba(79, 70, 229, 0) 60%)
+              radial-gradient(circle at bottom center, rgba(212, 175, 55, 0.6) -20%, rgba(180, 140, 30, 0) 60%)
             `,
                         filter: "blur(45px)",
                     }}
@@ -163,12 +163,12 @@ export const GradientCard = ({ children, className, containerClassName }: Gradie
                 <motion.div
                     className="absolute bottom-0 left-0 right-0 h-[2px] z-[25]"
                     style={{
-                        background: "linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0.05) 100%)",
+                        background: "linear-gradient(90deg, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0.7) 50%, rgba(212, 175, 55, 0.05) 100%)",
                     }}
                     animate={{
                         boxShadow: isHovered
-                            ? "0 0 20px 4px rgba(172, 92, 255, 0.9), 0 0 30px 6px rgba(138, 58, 185, 0.7), 0 0 40px 8px rgba(56, 189, 248, 0.5)"
-                            : "0 0 15px 3px rgba(172, 92, 255, 0.8), 0 0 25px 5px rgba(138, 58, 185, 0.6), 0 0 35px 7px rgba(56, 189, 248, 0.4)",
+                            ? "0 0 20px 4px rgba(212, 175, 55, 0.9), 0 0 30px 6px rgba(180, 140, 30, 0.7), 0 0 40px 8px rgba(245, 200, 80, 0.5)"
+                            : "0 0 15px 3px rgba(212, 175, 55, 0.8), 0 0 25px 5px rgba(180, 140, 30, 0.6), 0 0 35px 7px rgba(245, 200, 80, 0.4)",
                         opacity: isHovered ? 1 : 0.9,
                         z: 0.5
                     }}
@@ -185,8 +185,8 @@ export const GradientCard = ({ children, className, containerClassName }: Gradie
                     }}
                     animate={{
                         boxShadow: isHovered
-                            ? "0 0 20px 4px rgba(172, 92, 255, 0.9), 0 0 30px 6px rgba(138, 58, 185, 0.7), 0 0 40px 8px rgba(56, 189, 248, 0.5)"
-                            : "0 0 15px 3px rgba(172, 92, 255, 0.8), 0 0 25px 5px rgba(138, 58, 185, 0.6), 0 0 35px 7px rgba(56, 189, 248, 0.4)",
+                            ? "0 0 20px 4px rgba(212, 175, 55, 0.9), 0 0 30px 6px rgba(180, 140, 30, 0.7), 0 0 40px 8px rgba(245, 200, 80, 0.5)"
+                            : "0 0 15px 3px rgba(212, 175, 55, 0.8), 0 0 25px 5px rgba(180, 140, 30, 0.6), 0 0 35px 7px rgba(245, 200, 80, 0.4)",
                         opacity: isHovered ? 1 : 0.9,
                         z: 0.5
                     }}
@@ -203,8 +203,8 @@ export const GradientCard = ({ children, className, containerClassName }: Gradie
                     }}
                     animate={{
                         boxShadow: isHovered
-                            ? "0 0 20px 4px rgba(172, 92, 255, 0.9), 0 0 30px 6px rgba(138, 58, 185, 0.7), 0 0 40px 8px rgba(56, 189, 248, 0.5)"
-                            : "0 0 15px 3px rgba(172, 92, 255, 0.8), 0 0 25px 5px rgba(138, 58, 185, 0.6), 0 0 35px 7px rgba(56, 189, 248, 0.4)",
+                            ? "0 0 20px 4px rgba(212, 175, 55, 0.9), 0 0 30px 6px rgba(180, 140, 30, 0.7), 0 0 40px 8px rgba(245, 200, 80, 0.5)"
+                            : "0 0 15px 3px rgba(212, 175, 55, 0.8), 0 0 25px 5px rgba(180, 140, 30, 0.6), 0 0 35px 7px rgba(245, 200, 80, 0.4)",
                         opacity: isHovered ? 1 : 0.9,
                         z: 0.5
                     }}
