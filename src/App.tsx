@@ -10,6 +10,7 @@ import { insforge } from './lib/insforge';
 import { Helmet } from 'react-helmet-async';
 import GlowCard from './components/ui/GlowCard';
 import { SocialLinks } from './components/ui/SocialLinks';
+import { GradientCard } from './components/ui/GradientCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -635,7 +636,7 @@ export default function App() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
               {/* Card 1: Landing Page */}
-              <div className="group relative bg-onyx-light border border-white/10 p-10 rounded-2xl overflow-hidden md:hover:border-gold-accent/50 transition-all duration-500 md:hover:shadow-[0_0_50px_rgba(212,175,55,0.1)]">
+              <GradientCard className="p-10" containerClassName="h-full">
                 <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-100 transition-opacity">
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-gold-accent"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
                 </div>
@@ -644,8 +645,8 @@ export default function App() {
                 <p className="text-gray-400 mb-6">Full ownership of your digital infrastructure. One-time purchase.</p>
 
                 <div className="flex items-baseline gap-2 mb-8">
-                  <span className="text-4xl font-bold text-white">2500 €</span>
-                  <span className="text-gray-500">- 5000 €</span>
+                  <span className="text-4xl font-bold text-white">2000 €</span>
+                  <span className="text-gray-500">- 4000 €</span>
                 </div>
 
                 <ul className="space-y-4 mb-10 text-sm text-gray-300">
@@ -661,10 +662,10 @@ export default function App() {
                 >
                   Start Project
                 </button>
-              </div>
+              </GradientCard>
 
               {/* Card 2: Multi-page Website (New) */}
-              <div className="group relative bg-onyx-light border border-white/10 p-10 rounded-2xl overflow-hidden md:hover:border-gold-accent/50 transition-all duration-500 md:hover:shadow-[0_0_50px_rgba(212,175,55,0.1)]">
+              <GradientCard className="p-10" containerClassName="h-full">
                 <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-100 transition-opacity">
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-gold-accent"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 </div>
@@ -672,12 +673,9 @@ export default function App() {
                 <h3 className="text-3xl font-bold mb-4 text-white">Website as a Service</h3>
                 <p className="text-gray-400 mb-6">Total digital management. Premium presence with zero upfront risk.</p>
 
-                <div className="flex flex-col gap-1 mb-8">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-5xl font-bold text-white">250 €</span>
-                    <span className="text-gray-500">/ month</span>
-                  </div>
-                  <span className="text-gold-accent font-mono text-[10px] tracking-widest uppercase">0 € Upfront Cost</span>
+                <div className="flex items-baseline gap-2 mb-8">
+                  <span className="text-4xl font-bold text-white">150 €</span>
+                  <span className="text-gray-500">- 300 € / month</span>
                 </div>
 
                 <ul className="space-y-4 mb-10 text-sm text-gray-300">
@@ -693,10 +691,10 @@ export default function App() {
                 >
                   Subscribe Now
                 </button>
-              </div>
+              </GradientCard>
 
               {/* Card 3: Enterprise Plans (Updated Minimalist) */}
-              <div className="group relative bg-[#0a0a0a] border border-white/10 p-10 rounded-2xl overflow-hidden md:hover:border-white/20 transition-all duration-500 flex flex-col justify-center">
+              <GradientCard className="p-10" containerClassName="h-full">
                 <h3 className="text-3xl font-bold mb-6 text-white">Enterprise Plans</h3>
                 <p className="text-gray-400 mb-12 text-lg leading-relaxed">
                   Custom solutions tailored to your business needs—contact us.
@@ -708,7 +706,7 @@ export default function App() {
                 >
                   Contact sales
                 </button>
-              </div>
+              </GradientCard>
             </div>
           </section>
 
