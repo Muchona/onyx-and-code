@@ -61,13 +61,13 @@ export function SocialLinks({ socials, className, ...props }: SocialLinksProps) 
                         setClicked(true)
                     }}
                 >
-                    <span className="block text-sm font-medium text-white/70 group-hover:text-gold-accent transition-colors">
+                    <span className="hidden md:block text-sm font-medium text-white/70 group-hover:text-gold-accent transition-colors">
                         {social.name}
                     </span>
                     <AnimatePresence>
-                        {hoveredSocial === social.name && (
+                        {(hoveredSocial === social.name || (typeof window !== 'undefined' && window.innerWidth < 768)) && (
                             <motion.div
-                                className="absolute bottom-0 left-0 right-0 flex h-full w-full items-center justify-center pointer-events-none"
+                                className="static md:absolute bottom-0 left-0 right-0 flex h-full w-full items-center justify-center pointer-events-none"
                                 animate={animation}
                             >
                                 <motion.img
@@ -75,13 +75,13 @@ export function SocialLinks({ socials, className, ...props }: SocialLinksProps) 
                                     src={social.image}
                                     alt={social.name}
                                     className="size-10"
-                                    initial={{
+                                    initial={hoveredSocial === social.name ? {
                                         y: -25,
                                         rotate: rotation,
                                         opacity: 0,
                                         filter: "blur(2px)",
-                                    }}
-                                    animate={{ y: -35, opacity: 1, filter: "blur(0px)" }}
+                                    } : { opacity: 1 }}
+                                    animate={hoveredSocial === social.name ? { y: -35, opacity: 1, filter: "blur(0px)" } : { opacity: 1 }}
                                     exit={{ y: -25, opacity: 0, filter: "blur(2px)" }}
                                     transition={{ duration: 0.2 }}
                                 />
