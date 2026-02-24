@@ -17,23 +17,14 @@ interface SocialLinksProps extends React.HTMLAttributes<HTMLDivElement> {
 export function SocialLinks({ socials, className, ...props }: SocialLinksProps) {
     const [hoveredSocial, setHoveredSocial] = React.useState<string | null>(null)
     const [rotation, setRotation] = React.useState<number>(0)
-    const [clicked, setClicked] = React.useState<boolean>(false)
-
-    const animation = {
-        scale: clicked ? [1, 1.3, 1] : 1,
-        transition: { duration: 0.3 },
-    }
+    const [isMobile, setIsMobile] = React.useState(false)
 
     React.useEffect(() => {
-        const handleClick = () => {
-            setClicked(true)
-            setTimeout(() => {
-                setClicked(false)
-            }, 200)
-        }
-        window.addEventListener("click", handleClick)
-        return () => window.removeEventListener("click", handleClick)
-    }, [clicked])
+        const checkMobile = () => setIsMobile(window.innerWidth < 768)
+        checkMobile()
+        window.addEventListener("resize", checkMobile)
+        return () => window.removeEventListener("resize", checkMobile)
+    }, [])
 
     return (
         <div
@@ -46,48 +37,63 @@ export function SocialLinks({ socials, className, ...props }: SocialLinksProps) 
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cn(
-                        "relative cursor-pointer px-3 py-1.5 transition-opacity duration-200 block no-underline",
-                        hoveredSocial && hoveredSocial !== social.name
+                        "relative cursor-pointer transition-opacity duration-200 block no-underline",
+                        isMobile ? "px-4 py-2" : "px-3 py-1.5",
+                        !isMobile && hoveredSocial && hoveredSocial !== social.name
                             ? "opacity-50"
                             : "opacity-100"
                     )}
                     key={index}
                     onMouseEnter={() => {
-                        setHoveredSocial(social.name)
-                        setRotation(Math.random() * 20 - 10)
+                        if (!isMobile) {
+                            setHoveredSocial(social.name)
+                            setRotation(Math.random() * 20 - 10)
+                        }
                     }}
-                    onMouseLeave={() => setHoveredSocial(null)}
-                    onClick={() => {
-                        setClicked(true)
+                    onMouseLeave={() => {
+                        if (!isMobile) setHoveredSocial(null)
                     }}
                 >
-                    <span className="hidden md:block text-sm font-medium text-white/70 group-hover:text-gold-accent transition-colors">
-                        {social.name}
-                    </span>
-                    <AnimatePresence>
-                        {(hoveredSocial === social.name || (typeof window !== 'undefined' && window.innerWidth < 768)) && (
-                            <motion.div
-                                className="static md:absolute bottom-0 left-0 right-0 flex h-full w-full items-center justify-center pointer-events-none"
-                                animate={animation}
-                            >
-                                <motion.img
-                                    key={social.name}
-                                    src={social.image}
-                                    alt={social.name}
-                                    className="size-10"
-                                    initial={hoveredSocial === social.name ? {
-                                        y: -25,
-                                        rotate: rotation,
-                                        opacity: 0,
-                                        filter: "blur(2px)",
-                                    } : { opacity: 1 }}
-                                    animate={hoveredSocial === social.name ? { y: -35, opacity: 1, filter: "blur(0px)" } : { opacity: 1 }}
-                                    exit={{ y: -25, opacity: 0, filter: "blur(2px)" }}
-                                    transition={{ duration: 0.2 }}
-                                />
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                    {/* Mobile: static icon, always visible, no animation */}
+                    {isMobile && (
+                        <img
+                            src={social.image}
+                            alt={social.name}
+                            className="size-10"
+                        />
+                    )}
+
+                    {/* Desktop: text label + animated hover icon */}
+                    {!isMobile && (
+                        <>
+                            <span className="block text-sm font-medium text-white/70 hover:text-gold-accent transition-colors">
+                                {social.name}
+                            </span>
+                            <AnimatePresence>
+                                {hoveredSocial === social.name && (
+                                    <motion.div
+                                        className="absolute bottom-0 left-0 right-0 flex h-full w-full items-center justify-center pointer-events-none"
+                                    >
+                                        <motion.img
+                                            key={social.name}
+                                            src={social.image}
+                                            alt={social.name}
+                                            className="size-10"
+                                            initial={{
+                                                y: -25,
+                                                rotate: rotation,
+                                                opacity: 0,
+                                                filter: "blur(2px)",
+                                            }}
+                                            animate={{ y: -35, opacity: 1, filter: "blur(0px)" }}
+                                            exit={{ y: -25, opacity: 0, filter: "blur(2px)" }}
+                                            transition={{ duration: 0.2 }}
+                                        />
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </>
+                    )}
                 </a>
             ))}
         </div>
