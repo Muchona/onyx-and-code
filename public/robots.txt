@@ -1,4 +1,23 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://onyxandcode.com/sitemap.xml
+# AI Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Inspection
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+Sitemap: https://www.onyxandcode.com/sitemap.xml

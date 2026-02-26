@@ -39,42 +39,93 @@
   <meta name="geo.position" content="54.2492;-6.9683" />
   <meta name="ICBM" content="54.2492, -6.9683" />
 
-  <!-- JSON-LD Structured Data -->
+  <!-- JSON-LD Structured Data for AEO & GEO -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "Onyx & Code",
-      "image": "https://onyxandcode.com/og-image.png",
-      "@id": "https://www.onyxandcode.com",
-      "url": "https://www.onyxandcode.com",
-      "telephone": "+353894459967",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Monaghan Town",
-        "addressLocality": "Monaghan",
-        "addressRegion": "MN",
-        "postalCode": "H18",
-        "addressCountry": "IE"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 54.2492,
-        "longitude": -6.9683
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday"
-        ],
-        "opens": "09:00",
-        "closes": "18:00"
-      },
-      "priceRange": "€€€"
+      "@graph": [
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://www.onyxandcode.com/#organization",
+          "name": "Onyx & Code",
+          "url": "https://www.onyxandcode.com",
+          "logo": "https://onyxandcode.com/favicon.png",
+          "image": "https://onyxandcode.com/og-image.png",
+          "description": "Premier digital agency in Monaghan specializing in High-End Web Design, 3D Interactive Experiences, and Website-as-a-Service.",
+          "telephone": "+353894459967",
+          "email": "mamikon@onyxandcode.com",
+          "priceRange": "€€€",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Monaghan Town",
+            "addressLocality": "Monaghan",
+            "addressRegion": "MN",
+            "postalCode": "H18",
+            "addressCountry": "IE"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 54.2492,
+            "longitude": -6.9683
+          },
+          "sameAs": [
+            "https://www.facebook.com/onyxandcode",
+            "https://www.instagram.com/onyxandcod/",
+            "https://www.linkedin.com/in/mamikon-hovhannisyan-b18153175/"
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Digital Architecture Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "High-End Web Design",
+                  "description": "Custom, luxury web design with a focus on high-conversion and premium aesthetics."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "3D Interactive Experiences",
+                  "description": "Immersive 3D environments and interactive components for forward-thinking brands."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Website-as-a-Service (WaaS)",
+                  "description": "Ongoing web management, hosting, and updates for a flat monthly fee."
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What services does Onyx & Code offer in Monaghan?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Onyx & Code offers premier web design, full-stack development, 3D interactive experiences, and branding services for businesses in Monaghan and beyond."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does Onyx & Code provide Website as a Service?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, Onyx & Code provides a comprehensive Website-as-a-Service model, covering hosting, maintenance, and updates for a predictable monthly cost."
+              }
+            }
+          ]
+        }
+      ]
     }
   </script>
 </head>
