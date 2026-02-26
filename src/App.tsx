@@ -634,7 +634,7 @@ export default function App() {
                  // PROTOCOL_ACCESS
             </span>
 
-            <div className="grid grid-cols-2 gap-4 md:gap-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {/* Card 1: Landing Page */}
               <GradientCard containerClassName="h-full">
                 <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-100 transition-opacity">
