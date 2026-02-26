@@ -634,7 +634,7 @@ export default function App() {
                  // PROTOCOL_ACCESS
             </span>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <div className="grid grid-cols-2 gap-4 md:gap-8 max-w-5xl mx-auto">
               {/* Card 1: Landing Page */}
               <GradientCard containerClassName="h-full">
                 <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-100 transition-opacity">
@@ -693,20 +693,6 @@ export default function App() {
                 </button>
               </GradientCard>
 
-              {/* Card 3: Enterprise Plans (Updated Minimalist) */}
-              <GradientCard containerClassName="h-full">
-                <h3 className="text-3xl font-bold mb-6 text-white">Enterprise Plans</h3>
-                <p className="text-gray-400 mb-12 text-lg leading-relaxed">
-                  Custom solutions tailored to your business needs—contact us.
-                </p>
-
-                <button
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="w-full py-4 bg-white/5 border border-white/10 text-white font-bold tracking-widest uppercase rounded-lg md:hover:bg-white md:hover:text-black transition-all"
-                >
-                  Contact sales
-                </button>
-              </GradientCard>
             </div>
           </section>
 
