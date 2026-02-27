@@ -176,6 +176,79 @@ export default function LocalMagnet() {
                 <meta name="description" content="The premier web design agency in Monaghan, Ireland. We build luxury websites, 3D interactive experiences, and high-performance digital solutions for businesses." />
                 <meta name="keywords" content="Web Design Monaghan, Monaghan Web Developer, Website Design Monaghan, SEO Monaghan, Digital Agency Monaghan, Onyx and Code" />
                 <link rel="canonical" href="https://www.onyxandcode.com/web-design-monaghan" />
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "WebPage",
+                        "@id": "https://www.onyxandcode.com/web-design-monaghan#webpage",
+                        "url": "https://www.onyxandcode.com/web-design-monaghan",
+                        "name": "Web Design Monaghan | Onyx & Code",
+                        "description": "Premier digital agency in Monaghan specializing in High-End Web Design and 3D Interactive Experiences.",
+                        "breadcrumb": {
+                            "@type": "BreadcrumbList",
+                            "itemListElement": [
+                                {
+                                    "@type": "ListItem",
+                                    "position": 1,
+                                    "name": "Home",
+                                    "item": "https://www.onyxandcode.com/"
+                                },
+                                {
+                                    "@type": "ListItem",
+                                    "position": 2,
+                                    "name": "Web Design Monaghan"
+                                }
+                            ]
+                        },
+                        "mainEntity": {
+                            "@type": "ProfessionalService",
+                            "name": "Onyx & Code Monaghan",
+                            "image": "https://onyxandcode.com/og-image.png",
+                            "telePhone": "+353894459967",
+                            "url": "https://www.onyxandcode.com/web-design-monaghan",
+                            "address": {
+                                "@type": "PostalAddress",
+                                "streetAddress": "Dr Mckenna Terrace",
+                                "addressLocality": "Monaghan",
+                                "addressRegion": "MN",
+                                "postalCode": "H18",
+                                "addressCountry": "IE"
+                            },
+                            "geo": {
+                                "@type": "GeoCoordinates",
+                                "latitude": 54.2492,
+                                "longitude": -6.9683
+                            },
+                            "areaServed": {
+                                "@type": "City",
+                                "name": "Monaghan"
+                            },
+                            "priceRange": "€€€",
+                            "hasOfferCatalog": {
+                                "@type": "OfferCatalog",
+                                "name": "Local Digital Services",
+                                "itemListElement": [
+                                    {
+                                        "@type": "Offer",
+                                        "itemOffered": {
+                                            "@type": "Service",
+                                            "name": "Luxury Web Design",
+                                            "description": "Bespoke digital architecture for Monaghan businesses."
+                                        }
+                                    },
+                                    {
+                                        "@type": "Offer",
+                                        "itemOffered": {
+                                            "@type": "Service",
+                                            "name": "3D Interactive Development",
+                                            "description": "Advanced 3D web environments and Spline experiences."
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    })}
+                </script>
             </Helmet>
 
             {/* Background Systems */}
