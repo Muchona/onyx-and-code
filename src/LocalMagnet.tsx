@@ -66,7 +66,9 @@ function GoldParticles() {
         resize();
         window.addEventListener('resize', resize);
 
-        for (let i = 0; i < 60; i++) {
+        const isMobile = window.innerWidth < 768;
+        const count = isMobile ? 20 : 60;
+        for (let i = 0; i < count; i++) {
             particles.push({
                 x: Math.random() * canvas.width, y: Math.random() * canvas.height,
                 vx: (Math.random() - 0.5) * 0.2, vy: (Math.random() - 0.5) * 0.2 - 0.1,
@@ -224,10 +226,10 @@ export default function LocalMagnet() {
                             </div>
 
                             {/* CTAs */}
-                            <div className="flex flex-wrap gap-4">
+                            <div className="flex flex-col sm:flex-row gap-4">
                                 <button
                                     onClick={() => navigate('/#contact')}
-                                    className="hero-cta opacity-0 group relative px-8 py-4 overflow-hidden rounded-lg"
+                                    className="hero-cta opacity-0 group relative px-8 py-4 overflow-hidden rounded-lg w-full sm:w-auto"
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-r from-gold-accent to-amber-400 rounded-lg"></div>
                                     <div className="absolute inset-0 bg-gradient-to-r from-gold-accent to-amber-400 rounded-lg blur-xl opacity-30 group-hover:opacity-60 transition-opacity"></div>
@@ -236,7 +238,7 @@ export default function LocalMagnet() {
 
                                 <button
                                     onClick={() => navigate('/#portfolio')}
-                                    className="hero-cta opacity-0 px-8 py-4 border border-white/20 rounded-lg font-bold uppercase tracking-widest text-xs md:text-sm hover:bg-white/5 hover:border-white/40 transition-all"
+                                    className="hero-cta opacity-0 px-8 py-4 border border-white/20 rounded-lg font-bold uppercase tracking-widest text-xs md:text-sm hover:bg-white/5 hover:border-white/40 transition-all w-full sm:w-auto text-center"
                                 >
                                     View Our Work
                                 </button>
@@ -253,7 +255,7 @@ export default function LocalMagnet() {
                         </div>
 
                         {/* ── RIGHT: Interactive 3D ── */}
-                        <div className="flex-1 relative hidden md:block">
+                        <div className="flex-1 relative min-h-[400px] md:min-h-0">
                             <SplineScene
                                 scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
                                 className="w-full h-full"

@@ -23,7 +23,7 @@ export function StarsCanvas({
     paused = false,
 }: StarsCanvasProps) {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
-    const animationRef = useRef<number>();
+    const animationRef = useRef<number | null>(null);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -33,8 +33,11 @@ export function StarsCanvas({
         let w = (canvas.width = canvas.offsetWidth);
         let h = (canvas.height = canvas.offsetHeight);
 
+        const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+        const finalStarCount = isMobile ? 150 : maxStars;
+
         let stars: any[] = [];
-        let count = 0;
+        let starIdx = 0;
 
         const canvas2 = document.createElement('canvas');
         const ctx2 = canvas2.getContext('2d')!;
@@ -80,11 +83,11 @@ export function StarsCanvas({
                 this.radius = random(60, this.orbitRadius) / 10;
                 this.orbitX = w / 2;
                 this.orbitY = h / 2;
-                this.timePassed = random(0, maxStars);
+                this.timePassed = random(0, finalStarCount);
                 this.speed = (random(this.orbitRadius) / 100000) * speedMultiplier;
                 this.alpha = (random(2, 10) / 10) * brightness;
-                count++;
-                stars[count] = this;
+                starIdx++;
+                stars[starIdx] = this;
             }
 
             draw() {
@@ -94,7 +97,7 @@ export function StarsCanvas({
 
                 if (twinkle === 1 && this.alpha > 0) {
                     this.alpha -= 0.05;
-                } else if (twinkle === 2 && this.alpha < 1) {
+                } else if (twinkle === 10 && this.alpha < 1) {
                     this.alpha += 0.05;
                 }
 
@@ -104,16 +107,14 @@ export function StarsCanvas({
             }
         }
 
-        for (let i = 0; i < maxStars; i++) new Star();
+        for (let i = 0; i < finalStarCount; i++) new Star();
 
         const animate = () => {
             if (paused) return;
 
             ctx.globalCompositeOperation = 'source-over';
-            ctx.globalAlpha = 0.8;
-            ctx.fillStyle = transparent ? 'rgba(0, 0, 0, 0)' : 'rgba(15, 15, 15, 1)';
+            ctx.globalAlpha = 1.0;
             ctx.clearRect(0, 0, w, h);
-            ctx.fillRect(0, 0, w, h);
 
             ctx.globalCompositeOperation = 'lighter';
             for (let i = 1; i < stars.length; i++) {
@@ -126,13 +127,12 @@ export function StarsCanvas({
         animationRef.current = requestAnimationFrame(animate);
 
         const handleResize = () => {
-            if (!canvas) return;
+            if (!canvas || canvas.offsetWidth === 0) return;
             w = canvas.width = canvas.offsetWidth;
             h = canvas.height = canvas.offsetHeight;
-            // Recalculate star orbits on resize if needed or just let them stay
             stars = [];
-            count = 0;
-            for (let i = 0; i < maxStars; i++) new Star();
+            starIdx = 0;
+            for (let i = 0; i < finalStarCount; i++) new Star();
         };
 
         window.addEventListener('resize', handleResize);
