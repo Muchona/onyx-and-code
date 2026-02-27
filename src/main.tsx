@@ -6,6 +6,7 @@ import './index.css'
 import App from './App.tsx'
 import Success from './Success.tsx'
 import CoffeeSplash from './components/CoffeeSplash.tsx'
+import LocalMagnet from './LocalMagnet.tsx'
 
 const ZeroGravity = lazy(() => import('./components/ZeroGravity.tsx'));
 import { HelmetProvider } from 'react-helmet-async'
@@ -30,6 +31,7 @@ createRoot(document.getElementById('root')!).render(
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="/success" element={<Success />} />
+            <Route path="/web-design-monaghan" element={<LocalMagnet />} />
             <Route path="/splash" element={<CoffeeSplash />} />
             <Route path="/labs" element={<ZeroGravity />} />
             <Route path="*" element={<div style={{ background: 'red', color: 'white', padding: '100px', fontSize: '40px', fontWeight: 'bold' }}>404: ROUTE NOT FOUND IN REACT ROUTER</div>} />
