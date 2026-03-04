@@ -206,6 +206,7 @@ export default function LocalMagnet() {
                             "image": "https://onyxandcode.com/og-image.png",
                             "telePhone": "+353894459967",
                             "url": "https://www.onyxandcode.com/web-design-monaghan",
+                            "description": "Onyx & Code is the premier studio for Web Design in Monaghan, Ireland. We specialize in high-performance digital architecture and 3D experiences.",
                             "address": {
                                 "@type": "PostalAddress",
                                 "streetAddress": "Dr Mckenna Terrace",
@@ -226,14 +227,22 @@ export default function LocalMagnet() {
                             "priceRange": "€€€",
                             "hasOfferCatalog": {
                                 "@type": "OfferCatalog",
-                                "name": "Local Digital Services",
+                                "name": "Web Design & Digital Services",
                                 "itemListElement": [
                                     {
                                         "@type": "Offer",
                                         "itemOffered": {
                                             "@type": "Service",
-                                            "name": "Luxury Web Design",
-                                            "description": "Bespoke digital architecture for Monaghan businesses."
+                                            "name": "Web Design Monaghan",
+                                            "description": "Professional Web Design services in Monaghan, specializing in luxury, high-performance websites."
+                                        }
+                                    },
+                                    {
+                                        "@type": "Offer",
+                                        "itemOffered": {
+                                            "@type": "Service",
+                                            "name": "Website designer",
+                                            "description": "Expert website designer in Monaghan creating bespoke digital experiences."
                                         }
                                     },
                                     {
