@@ -11,6 +11,8 @@ import { Helmet } from 'react-helmet-async';
 import GlowCard from './components/ui/GlowCard';
 import { SocialLinks } from './components/ui/SocialLinks';
 import { GradientCard } from './components/ui/GradientCard';
+import RadialOrbitalTimeline from './components/ui/radial-orbital-timeline';
+import { Search, FileText, Code, Shield, Rocket } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -434,25 +436,72 @@ export default function App() {
             </div>
           </section>
 
-          {/* Blueprint / Process Cards */}
+          {/* Blueprint / Process Section */}
           <section id="process" className="pt-20" ref={processRef}>
-            <span className="font-mono text-xs text-gold-accent opacity-80 tracking-[4px] block mb-8 drop-shadow-[0_0_5px_rgba(212,175,55,0.4)]">
-                // CORE_PROTOCOL_01
+            <span className="font-mono text-xs text-gold-accent opacity-80 tracking-[4px] block mb-8 drop-shadow-[0_0_5px_rgba(212,175,55,0.4)] uppercase">
+                // SYSTEM_ORCHESTRATION_PROTOCOL
             </span>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-              {[
-                { id: '01', title: 'Strategic Discovery', desc: 'Dissecting business models to build foundations for high-traffic AI interactions.' },
-                { id: '02', title: 'Precision Design', desc: 'Executive-standard builds using optimized frameworks and immersive 3D spatial orchestration.' },
-                { id: '03', title: 'Visual Excellence', desc: 'Polishing user journeys with physics, motion, and lighting that defines the premium brand.' }
-              ].map((step) => (
-                <div key={step.id} className="process-card h-full bg-onyx-light p-12 md:p-12 border border-white/10 md:hover:border-gold-accent/50 transition-all duration-500 md:hover:-translate-y-2 md:hover:scale-[1.02] shadow-lg md:hover:shadow-2xl md:hover:shadow-gold-accent/10 rounded-xl backdrop-blur-sm group flex flex-col justify-center cursor-pointer">
-                  <span className="font-mono text-gold-accent text-xs tracking-widest block mb-6 px-3 py-1 bg-gold-accent/10 w-fit rounded group-hover:bg-gold-accent group-hover:text-black transition-colors">
-                    {step.id}_PHASE
-                  </span>
-                  <h3 className="text-2xl font-bold mb-4 tracking-tight text-white group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">{step.title}</h3>
-                  <p className="text-gray-300 text-sm leading-relaxed group-hover:text-white transition-colors">{step.desc}</p>
-                </div>
-              ))}
+
+            <div className="relative">
+              <RadialOrbitalTimeline
+                timelineData={[
+                  {
+                    id: 1,
+                    title: "Project Discovery",
+                    date: "Phase 01",
+                    content: "We define the architectural blueprint of your digital footprint, identifying core business goals and technical requirements with precision.",
+                    category: "Planning",
+                    icon: Search,
+                    relatedIds: [2],
+                    status: "completed" as const,
+                    energy: 100,
+                  },
+                  {
+                    id: 2,
+                    title: "Structural Design",
+                    date: "Phase 02",
+                    content: "Engineering the aesthetic and functional framework. We create bespoke UI/UX designs that serve as the foundation of your digital reality.",
+                    category: "Design",
+                    icon: FileText,
+                    relatedIds: [1, 3],
+                    status: "completed" as const,
+                    energy: 90,
+                  },
+                  {
+                    id: 3,
+                    title: "Core Development",
+                    date: "Phase 03",
+                    content: "Forging the high-performance engine. Our 'Digital Architects' implement robust, scalable code using the latest full-stack technology.",
+                    category: "Development",
+                    icon: Code,
+                    relatedIds: [2, 4],
+                    status: "in-progress" as const,
+                    energy: 75,
+                  },
+                  {
+                    id: 4,
+                    title: "Resilience Testing",
+                    date: "Phase 04",
+                    content: "Stress-testing every component for maximum durability and security, ensuring your platform is ready for the high-traffic frontier.",
+                    category: "Testing",
+                    icon: Shield,
+                    relatedIds: [3, 5],
+                    status: "pending" as const,
+                    energy: 40,
+                  },
+                  {
+                    id: 5,
+                    title: "Elite Deployment",
+                    date: "Phase 05",
+                    content: "Final deployment of your digital architecture to the live environment, monitored with high-fidelity performance metrics.",
+                    category: "Release",
+                    icon: Rocket,
+                    relatedIds: [4],
+                    status: "pending" as const,
+                    energy: 10,
+                  }
+                ]}
+              />
             </div>
           </section>
 
