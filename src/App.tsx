@@ -12,7 +12,8 @@ import GlowCard from './components/ui/GlowCard';
 import { SocialLinks } from './components/ui/SocialLinks';
 import { GradientCard } from './components/ui/GradientCard';
 import RadialOrbitalTimeline from './components/ui/radial-orbital-timeline';
-import { Search, FileText, Code, Shield, Rocket } from 'lucide-react';
+import { Search, FileText, Code, Shield, Rocket, Palette, Zap, ShoppingBag, Infinity } from 'lucide-react';
+import InteractiveImageAccordion from './components/ui/interactive-image-accordion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -436,6 +437,26 @@ export default function App() {
             </div>
           </section>
 
+          {/* Our Service Accordion Section */}
+          <section className="py-20 md:py-32 overflow-hidden">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8">
+              <div className="max-w-2xl">
+                <span className="font-mono text-xs text-gold-accent opacity-80 tracking-[4px] block mb-6 drop-shadow-[0_0_5px_rgba(212,175,55,0.4)] uppercase">
+                    // OUR_SERVICES
+                </span>
+                <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                  High-Performance <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Digital Solutions.</span>
+                </h2>
+              </div>
+              <p className="text-gray-400 max-w-sm text-sm leading-relaxed border-l border-white/10 pl-6">
+                Explore our core capabilities bridging the gap between immersive design and industrial-grade software engineering.
+              </p>
+            </div>
+
+            <InteractiveImageAccordion />
+          </section>
+
           {/* Blueprint / Process Section */}
           <section id="process" className="pt-20" ref={processRef}>
             <span className="font-mono text-xs text-gold-accent opacity-80 tracking-[4px] block mb-8 drop-shadow-[0_0_5px_rgba(212,175,55,0.4)] uppercase">
@@ -681,67 +702,223 @@ export default function App() {
           <section id="pricing" className="py-32">
             <span className="font-mono text-xs text-gold-accent opacity-80 tracking-[4px] block mb-12 text-center drop-shadow-[0_0_5px_rgba(212,175,55,0.4)]">
                  // PROTOCOL_ACCESS
-            </span>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              {/* Card 1: Landing Page */}
-              <GradientCard containerClassName="h-full">
-                <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-100 transition-opacity">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-gold-accent"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+            </span>            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto px-4">
+              {/* Protocol 01: Bespoke Web Design */}
+              <GradientCard containerClassName="h-full group">
+                <div className="absolute top-0 right-0 p-8 opacity-40 group-hover:opacity-100 transition-all duration-700">
+                  <div className="relative">
+                    <div className="absolute -inset-2 bg-gold-accent/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <Palette className="w-10 h-10 text-gold-accent relative z-10" strokeWidth={1} />
+                  </div>
                 </div>
 
-                <h3 className="text-3xl font-bold mb-4 text-white">Project Fee</h3>
-                <p className="text-gray-400 mb-6">Full ownership of your digital infrastructure. One-time purchase.</p>
+                <div className="flex flex-col h-full">
+                  <div className="mb-8">
+                    <span className="font-mono text-[10px] text-gold-accent tracking-[4px] uppercase mb-4 block opacity-60">
+                      ID: ONYX_PROTO_01
+                    </span>
+                    <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white font-outfit uppercase tracking-tighter">
+                      Bespoke Web Design
+                    </h3>
+                    <div className="h-[2px] w-24 bg-gradient-to-r from-gold-accent/50 to-transparent mb-6"></div>
+                    <p className="text-gray-400 text-sm leading-relaxed font-medium italic border-l-2 border-white/10 pl-4 mb-8">
+                      "Elite creative architecture focusing on sophisticated typography, immersive 3D aesthetics, and high-end brand storytelling."
+                    </p>
+                  </div>
 
-                <div className="flex items-baseline gap-2 mb-8">
-                  <span className="text-4xl font-bold text-white">2000 €</span>
-                  <span className="text-gray-500">- 4000 €</span>
+                  <div className="space-y-6 mb-12 flex-grow">
+                    <div className="flex items-start gap-4 group/item">
+                      <div className="p-2 bg-white/5 rounded-lg group-hover/item:bg-gold-accent/10 transition-colors">
+                        <Shield className="w-4 h-4 text-gold-accent" />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-1">Creative Strategy</h4>
+                        <p className="text-gray-500 text-[10px]">Deep brand alignment and bespoke visual directions.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-4 group/item">
+                      <div className="p-2 bg-white/5 rounded-lg group-hover/item:bg-gold-accent/10 transition-colors">
+                        <Rocket className="w-4 h-4 text-gold-accent" />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-1">Advanced 3D Art</h4>
+                        <p className="text-gray-500 text-[10px]">Custom Three.js & Spline scenes integrated into your UX.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="w-full py-4 border border-white/20 rounded-xl md:hover:bg-white md:hover:text-black font-black tracking-[4px] uppercase transition-all active:scale-95 text-xs"
+                  >
+                    Initiate Design
+                  </button>
                 </div>
-
-                <ul className="space-y-4 mb-10 text-sm text-gray-300">
-                  <li className="flex items-center gap-3"><span className="text-gold-accent">✓</span> Custom React Architecture</li>
-                  <li className="flex items-center gap-3"><span className="text-gold-accent">✓</span> High-Fidelity 3D Elements</li>
-                  <li className="flex items-center gap-3"><span className="text-gold-accent">✓</span> Fluid GSAP Animations</li>
-                  <li className="flex items-center gap-3"><span className="text-gold-accent">✓</span> Full Source Code Ownership</li>
-                </ul>
-
-                <button
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="w-full py-4 border border-white/20 rounded-lg md:hover:bg-white md:hover:text-black font-bold tracking-widest uppercase transition-all"
-                >
-                  Start Project
-                </button>
               </GradientCard>
 
-              {/* Card 2: Multi-page Website (New) */}
-              <GradientCard containerClassName="h-full">
-                <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-100 transition-opacity">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-gold-accent"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              {/* Protocol 02: Conversion Landing Pages */}
+              <GradientCard containerClassName="h-full group">
+                <div className="absolute top-0 right-0 p-8 opacity-40 group-hover:opacity-100 transition-all duration-700">
+                  <div className="relative">
+                    <div className="absolute -inset-2 bg-gold-accent/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <Zap className="w-10 h-10 text-gold-accent relative z-10" strokeWidth={1} />
+                  </div>
                 </div>
 
-                <h3 className="text-3xl font-bold mb-4 text-white">Website as a Service</h3>
-                <p className="text-gray-400 mb-6">Total digital management. Premium presence with zero upfront risk.</p>
+                <div className="flex flex-col h-full">
+                  <div className="mb-8">
+                    <span className="font-mono text-[10px] text-gold-accent tracking-[4px] uppercase mb-4 block opacity-60">
+                      ID: ONYX_PROTO_02
+                    </span>
+                    <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white font-outfit uppercase tracking-tighter">
+                      Performance Landing Pages
+                    </h3>
+                    <div className="h-[2px] w-24 bg-gradient-to-r from-gold-accent/50 to-transparent mb-6"></div>
+                    <p className="text-gray-400 text-sm leading-relaxed font-medium italic border-l-2 border-white/10 pl-4 mb-8">
+                      "High-velocity deployment for marketing campaigns and product launches designed for maximum user conversion and speed."
+                    </p>
+                  </div>
 
-                <div className="flex items-baseline gap-2 mb-8">
-                  <span className="text-4xl font-bold text-white">150 €</span>
-                  <span className="text-gray-500">- 300 € / month</span>
+                  <div className="space-y-6 mb-12 flex-grow">
+                    <div className="flex items-start gap-4 group/item">
+                      <div className="p-2 bg-white/5 rounded-lg group-hover/item:bg-gold-accent/10 transition-colors">
+                        <Rocket className="w-4 h-4 text-gold-accent" />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-1">Frictionless UX</h4>
+                        <p className="text-gray-500 text-[10px]">Optimized user journeys to drive immediate engagement.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-4 group/item">
+                      <div className="p-2 bg-white/5 rounded-lg group-hover/item:bg-gold-accent/10 transition-colors">
+                        <Zap className="w-4 h-4 text-gold-accent" />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-1">High-Speed Metrics</h4>
+                        <p className="text-gray-500 text-[10px]">90+ Lighthouse scores for SEO and ad relevance.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="w-full py-4 border border-white/20 rounded-xl md:hover:bg-white md:hover:text-black font-black tracking-[4px] uppercase transition-all active:scale-95 text-xs"
+                  >
+                    Launch Campaign
+                  </button>
                 </div>
-
-                <ul className="space-y-4 mb-10 text-sm text-gray-300">
-                  <li className="flex items-center gap-3"><span className="text-gold-accent">✓</span> Hosting, Secuity & Performance</li>
-                  <li className="flex items-center gap-3"><span className="text-gold-accent">✓</span> Interactive 3D & GSAP Motion</li>
-                  <li className="flex items-center gap-3"><span className="text-gold-accent">✓</span> AI-Driven Content Updates</li>
-                  <li className="flex items-center gap-3"><span className="text-gold-accent">✓</span> Priority Design Support</li>
-                </ul>
-
-                <button
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="w-full py-4 bg-gold-accent text-black rounded-lg md:hover:bg-white transition-all font-bold tracking-widest uppercase"
-                >
-                  Subscribe Now
-                </button>
               </GradientCard>
 
+              {/* Protocol 03: E-Commerce Protocols */}
+              <GradientCard containerClassName="h-full group">
+                <div className="absolute top-0 right-0 p-8 opacity-40 group-hover:opacity-100 transition-all duration-700">
+                  <div className="relative">
+                    <div className="absolute -inset-2 bg-gold-accent/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <ShoppingBag className="w-10 h-10 text-gold-accent relative z-10" strokeWidth={1} />
+                  </div>
+                </div>
+
+                <div className="flex flex-col h-full">
+                  <div className="mb-8">
+                    <span className="font-mono text-[10px] text-gold-accent tracking-[4px] uppercase mb-4 block opacity-60">
+                      ID: ONYX_PROTO_03
+                    </span>
+                    <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white font-outfit uppercase tracking-tighter">
+                      E-Commerce Architecture
+                    </h3>
+                    <div className="h-[2px] w-24 bg-gradient-to-r from-gold-accent/50 to-transparent mb-6"></div>
+                    <p className="text-gray-400 text-sm leading-relaxed font-medium italic border-l-2 border-white/10 pl-4 mb-8">
+                      "Bespoke Shopify and Next.js commerce solutions for retail brands requiring a distinctive, high-end digital storefront."
+                    </p>
+                  </div>
+
+                  <div className="space-y-6 mb-12 flex-grow">
+                    <div className="flex items-start gap-4 group/item">
+                      <div className="p-2 bg-white/5 rounded-lg group-hover/item:bg-gold-accent/10 transition-colors">
+                        <Code className="w-4 h-4 text-gold-accent" />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-1">Shopify Headless</h4>
+                        <p className="text-gray-500 text-[10px]">Decoupled storefronts for absolute creative freedom.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-4 group/item">
+                      <div className="p-2 bg-white/5 rounded-lg group-hover/item:bg-gold-accent/10 transition-colors">
+                        <ShoppingBag className="w-4 h-4 text-gold-accent" />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-1">Retail Scalability</h4>
+                        <p className="text-gray-500 text-[10px]">Systems built to handle massive traffic and inventory.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="w-full py-4 border border-white/20 rounded-xl md:hover:bg-white md:hover:text-black font-black tracking-[4px] uppercase transition-all active:scale-95 text-xs"
+                  >
+                    Build Storefront
+                  </button>
+                </div>
+              </GradientCard>
+
+              {/* Protocol 04: Managed Digital Ecosystem */}
+              <GradientCard containerClassName="h-full group">
+                <div className="absolute top-0 right-0 p-8 opacity-40 group-hover:opacity-100 transition-all duration-700">
+                  <div className="relative">
+                    <div className="absolute -inset-2 bg-gold-accent/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <Infinity className="w-10 h-10 text-gold-accent relative z-10" strokeWidth={1} />
+                  </div>
+                </div>
+
+                <div className="flex flex-col h-full">
+                  <div className="mb-8">
+                    <div className="flex justify-between items-start mb-4">
+                      <span className="font-mono text-[10px] text-gold-accent tracking-[4px] uppercase opacity-60">
+                        ID: ONYX_PROTO_04
+                      </span>
+                      <span className="font-mono text-[10px] bg-gold-accent/20 text-gold-accent px-2 py-1 rounded">
+                        STATUS: ACTIVE
+                      </span>
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white font-outfit uppercase tracking-tighter">
+                      Managed Ecosystem
+                    </h3>
+                    <div className="h-[2px] w-24 bg-gradient-to-r from-gold-accent to-transparent mb-6"></div>
+                    <p className="text-gray-400 text-sm leading-relaxed font-medium italic border-l-2 border-gold-accent pl-4 mb-8">
+                      "Unlimited design cycles and 24/7 technical monitoring for partners requiring continuous evolution and elite support."
+                    </p>
+                  </div>
+
+                  <div className="space-y-6 mb-12 flex-grow">
+                    <div className="flex items-start gap-4 group/item">
+                      <div className="p-2 bg-gold-accent/10 rounded-lg group-hover/item:bg-gold-accent/20 transition-colors">
+                        <Shield className="w-4 h-4 text-gold-accent" />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-1">Concierge Design</h4>
+                        <p className="text-gray-500 text-[10px]">Personal design requests handled within 48-hour sprints.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-4 group/item">
+                      <div className="p-2 bg-gold-accent/10 rounded-lg group-hover/item:bg-gold-accent/20 transition-colors">
+                        <Code className="w-4 h-4 text-gold-accent" />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-1">Technical Scaling</h4>
+                        <p className="text-gray-500 text-[10px]">Immediate security updates and performance fine-tuning.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="w-full py-4 bg-gold-accent text-black rounded-xl md:hover:bg-white transition-all font-black tracking-[4px] uppercase shadow-[0_0_30px_rgba(212,175,55,0.3)] hover:shadow-[0_0_50px_rgba(212,175,55,0.5)] active:scale-95 text-xs"
+                  >
+                    Subscribe Now
+                  </button>
+                </div>
+              </GradientCard>
             </div>
           </section>
 
