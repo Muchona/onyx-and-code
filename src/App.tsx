@@ -139,7 +139,7 @@ export default function App() {
       if (dbError) throw dbError;
 
       // 2. Dual-post to Formspree for Email Notifications (Zoho/Gmail)
-      const emailResponse = await fetch("https://formspree.io/f/mbddjynj", {
+      const emailResponse = await fetch("https://formspree.io/f/xojgldkv", {
         method: "POST",
         body: formData,
         headers: {
