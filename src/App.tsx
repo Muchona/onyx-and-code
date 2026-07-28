@@ -713,7 +713,7 @@ export default function App() {
                 </div>
 
                 <div className="flex flex-col h-full">
-                  <div className="mb-8">
+                  <div className="mb-8 flex-grow">
                     <span className="font-mono text-[10px] text-gold-accent tracking-[4px] uppercase mb-4 block opacity-60">
                       ID: ONYX_PROTO_01
                     </span>
@@ -726,7 +726,7 @@ export default function App() {
                     </p>
                   </div>
 
-                  <div className="space-y-6 mb-12 flex-grow">
+                  <div className="space-y-6 mb-12">
                     <div className="flex items-start gap-4 group/item">
                       <div className="p-2 bg-white/5 rounded-lg group-hover/item:bg-gold-accent/10 transition-colors">
                         <Shield className="w-4 h-4 text-gold-accent" />
@@ -766,7 +766,7 @@ export default function App() {
                 </div>
 
                 <div className="flex flex-col h-full">
-                  <div className="mb-8">
+                  <div className="mb-8 flex-grow">
                     <span className="font-mono text-[10px] text-gold-accent tracking-[4px] uppercase mb-4 block opacity-60">
                       ID: ONYX_PROTO_02
                     </span>
@@ -779,7 +779,7 @@ export default function App() {
                     </p>
                   </div>
 
-                  <div className="space-y-6 mb-12 flex-grow">
+                  <div className="space-y-6 mb-12">
                     <div className="flex items-start gap-4 group/item">
                       <div className="p-2 bg-white/5 rounded-lg group-hover/item:bg-gold-accent/10 transition-colors">
                         <Rocket className="w-4 h-4 text-gold-accent" />
@@ -819,7 +819,7 @@ export default function App() {
                 </div>
 
                 <div className="flex flex-col h-full">
-                  <div className="mb-8">
+                  <div className="mb-8 flex-grow">
                     <span className="font-mono text-[10px] text-gold-accent tracking-[4px] uppercase mb-4 block opacity-60">
                       ID: ONYX_PROTO_03
                     </span>
@@ -832,7 +832,7 @@ export default function App() {
                     </p>
                   </div>
 
-                  <div className="space-y-6 mb-12 flex-grow">
+                  <div className="space-y-6 mb-12">
                     <div className="flex items-start gap-4 group/item">
                       <div className="p-2 bg-white/5 rounded-lg group-hover/item:bg-gold-accent/10 transition-colors">
                         <Code className="w-4 h-4 text-gold-accent" />
@@ -872,7 +872,7 @@ export default function App() {
                 </div>
 
                 <div className="flex flex-col h-full">
-                  <div className="mb-8">
+                  <div className="mb-8 flex-grow">
                     <div className="flex justify-between items-start mb-4">
                       <span className="font-mono text-[10px] text-gold-accent tracking-[4px] uppercase opacity-60">
                         ID: ONYX_PROTO_04
@@ -890,7 +890,7 @@ export default function App() {
                     </p>
                   </div>
 
-                  <div className="space-y-6 mb-12 flex-grow">
+                  <div className="space-y-6 mb-12">
                     <div className="flex items-start gap-4 group/item">
                       <div className="p-2 bg-gold-accent/10 rounded-lg group-hover/item:bg-gold-accent/20 transition-colors">
                         <Shield className="w-4 h-4 text-gold-accent" />
