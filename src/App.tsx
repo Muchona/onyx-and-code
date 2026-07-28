@@ -714,10 +714,12 @@ export default function App() {
 
                 <div className="flex flex-col h-full">
                   <div className="mb-8 flex-grow">
-                    <span className="font-mono text-[10px] text-gold-accent tracking-[4px] uppercase mb-4 block opacity-60">
-                      ID: ONYX_PROTO_01
-                    </span>
-                    <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white font-outfit uppercase tracking-tighter">
+                    <div className="flex items-start mb-4 min-h-[44px]">
+                      <span className="font-mono text-[10px] text-gold-accent tracking-[4px] uppercase opacity-60">
+                        ID: ONYX_PROTO_01
+                      </span>
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white font-outfit uppercase tracking-tighter min-h-[90px] md:min-h-[108px]">
                       Bespoke Web Design
                     </h3>
                     <div className="h-[2px] w-24 bg-gradient-to-r from-gold-accent/50 to-transparent mb-6"></div>
@@ -767,10 +769,12 @@ export default function App() {
 
                 <div className="flex flex-col h-full">
                   <div className="mb-8 flex-grow">
-                    <span className="font-mono text-[10px] text-gold-accent tracking-[4px] uppercase mb-4 block opacity-60">
-                      ID: ONYX_PROTO_02
-                    </span>
-                    <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white font-outfit uppercase tracking-tighter">
+                    <div className="flex items-start mb-4 min-h-[44px]">
+                      <span className="font-mono text-[10px] text-gold-accent tracking-[4px] uppercase opacity-60">
+                        ID: ONYX_PROTO_02
+                      </span>
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white font-outfit uppercase tracking-tighter min-h-[90px] md:min-h-[108px]">
                       Performance Landing Pages
                     </h3>
                     <div className="h-[2px] w-24 bg-gradient-to-r from-gold-accent/50 to-transparent mb-6"></div>
@@ -820,10 +824,12 @@ export default function App() {
 
                 <div className="flex flex-col h-full">
                   <div className="mb-8 flex-grow">
-                    <span className="font-mono text-[10px] text-gold-accent tracking-[4px] uppercase mb-4 block opacity-60">
-                      ID: ONYX_PROTO_03
-                    </span>
-                    <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white font-outfit uppercase tracking-tighter">
+                    <div className="flex items-start mb-4 min-h-[44px]">
+                      <span className="font-mono text-[10px] text-gold-accent tracking-[4px] uppercase opacity-60">
+                        ID: ONYX_PROTO_03
+                      </span>
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white font-outfit uppercase tracking-tighter min-h-[90px] md:min-h-[108px]">
                       E-Commerce Architecture
                     </h3>
                     <div className="h-[2px] w-24 bg-gradient-to-r from-gold-accent/50 to-transparent mb-6"></div>
@@ -873,7 +879,7 @@ export default function App() {
 
                 <div className="flex flex-col h-full">
                   <div className="mb-8 flex-grow">
-                    <div className="flex justify-between items-start mb-4">
+                    <div className="flex justify-between items-start mb-4 min-h-[44px]">
                       <span className="font-mono text-[10px] text-gold-accent tracking-[4px] uppercase opacity-60">
                         ID: ONYX_PROTO_04
                       </span>
@@ -881,7 +887,7 @@ export default function App() {
                         STATUS: ACTIVE
                       </span>
                     </div>
-                    <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white font-outfit uppercase tracking-tighter">
+                    <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white font-outfit uppercase tracking-tighter min-h-[90px] md:min-h-[108px]">
                       Managed Ecosystem
                     </h3>
                     <div className="h-[2px] w-24 bg-gradient-to-r from-gold-accent to-transparent mb-6"></div>
