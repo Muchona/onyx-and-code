@@ -11,7 +11,7 @@ interface Message {
 export default function AgentChat() {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
-        { id: 1, type: 'agent', text: 'Protocol initialized. Agent CORE online. How can I assist you with your digital architecture?' }
+        { id: 1, type: 'agent', text: 'Hello! I am Emily, your AI digital assistant. How can I help you today?' }
     ]);
     const [input, setInput] = useState('');
     const [isTyping, setIsTyping] = useState(false);
@@ -54,8 +54,8 @@ export default function AgentChat() {
                 const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
 
                 const prompt = `
-                    You are "Agent CORE", a high-end digital architecture assistant for "Onyx & Code".
-                    You are intelligent, professional, and slightly sci-fi/futuristic in tone.
+                    You are "Emily", a friendly and professional digital architecture assistant for "Onyx & Code".
+                    You are intelligent, helpful, and polite.
                     You help users build premium 3D websites.
                     Keep answers concise (under 50 words) and helpful.
                     User: ${userMsg.text}
@@ -79,7 +79,7 @@ export default function AgentChat() {
                     } else if (lowerInput.includes("price") || lowerInput.includes("cost") || lowerInput.includes("much")) {
                         responseText = "Project estimations vary based on complexity. For a standard commercial suite, we offer competitive tiers.";
                     } else if (lowerInput.includes("who are you") || lowerInput.includes("what is this")) {
-                        responseText = "I am Agent CORE, the primary digital interface for Onyx & Code. I facilitate high-end web architecture.";
+                        responseText = "I am Emily, the AI digital assistant for Onyx & Code. I am here to help you!";
                     } else if (lowerInput.includes("bye") || lowerInput.includes("goodbye")) {
                         responseText = "Session termination acknowledged. Have a productive cycle.";
                     } else {
@@ -117,7 +117,7 @@ export default function AgentChat() {
                     <div className="bg-black/50 p-4 border-b border-white/10 flex justify-between items-center">
                         <div className="flex items-center gap-2">
                             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                            <span className="font-mono text-xs text-gold-accent tracking-widest">AGENT_CORE_V1</span>
+                            <span className="font-mono text-xs text-gold-accent tracking-widest">EMILY AI</span>
                         </div>
                         <button onClick={toggleChat} className="text-gray-400 md:hover:text-white transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
