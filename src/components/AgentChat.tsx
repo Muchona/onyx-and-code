@@ -53,13 +53,19 @@ export default function AgentChat() {
                 const genAI = new GoogleGenerativeAI(apiKey);
                 const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
 
+                const historyStr = messages.map(m => `${m.type === 'user' ? 'User' : 'Emily'}: ${m.text}`).join('\n');
+
                 const prompt = `
-                    You are "Emily", a friendly and professional digital architecture assistant for "Onyx & Code".
-                    You are intelligent, helpful, and polite.
-                    You help users build premium 3D websites.
-                    Keep answers concise (under 50 words) and helpful.
-                    User: ${userMsg.text}
-                `;
+You are "Emily", a professional digital architecture assistant for the web design agency "Onyx & Code".
+CRITICAL RULES:
+1. DO NOT start your responses with greetings like "Hello" or "Hi". Just answer the user directly.
+2. Do not force the word "3D" into every answer. Only mention specific services if it naturally fits the conversation.
+3. Keep answers concise (under 50 words) and conversational.
+
+Here is the recent conversation history so you remember what was said:
+${historyStr}
+User: ${userMsg.text}
+Emily:`;
 
                 const result = await model.generateContent(prompt);
                 const response = result.response;
