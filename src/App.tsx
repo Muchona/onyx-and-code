@@ -125,6 +125,14 @@ export default function App() {
         has_3d: false
       },
       {
+        id: '9',
+        name: 'An Nead',
+        description: 'Custom digital architecture, branding, and web presence.',
+        image_url: '/og-image.png', // Fallback
+        live_url: '#',
+        has_3d: false
+      },
+      {
         id: '7',
         name: 'Monaghan Denture Clinic',
         description: 'High-performance web portal designed specifically for patient bookings and services.',
