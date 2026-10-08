@@ -81,7 +81,7 @@ export default function App() {
         name: 'Slice of Italy',
         description: 'Premium e-commerce and ordering platform for an authentic Italian pizzeria.',
         image_url: '/slice-of-italy.png',
-        live_url: 'https://sliceofitaly.com',
+        live_url: 'https://github.com/Muchona/slice-of-italy',
         has_3d: true
       },
       {
@@ -89,7 +89,7 @@ export default function App() {
         name: 'The Batch Loaf',
         description: 'Modern, elegant restaurant website with integrated reservation systems.',
         image_url: '/the-batch-loaf.png',
-        live_url: 'https://thebatchloaf.com',
+        live_url: 'https://github.com/Muchona/the-batch-loaf',
         has_3d: false
       },
       {
@@ -97,7 +97,7 @@ export default function App() {
         name: 'Jimmy\'s Bar & Restaurant',
         description: 'Dynamic digital presence for a bustling local bar and restaurant.',
         image_url: '/jimmys-bg.jpg',
-        live_url: 'https://jimmysbar.ie',
+        live_url: 'https://github.com/Muchona/jimmys-bar',
         has_3d: false
       },
       {
@@ -105,7 +105,7 @@ export default function App() {
         name: 'Roberto\'s Coffee',
         description: 'Immersive digital storefront for a specialty coffee roaster.',
         image_url: '/robertos-coffee.png',
-        live_url: 'https://robertoscoffee.ie',
+        live_url: 'https://github.com/Muchona/robertos-coffee',
         has_3d: true
       },
       {
@@ -113,7 +113,7 @@ export default function App() {
         name: 'Gray Solicitors',
         description: 'Professional, high-trust corporate website for a legal firm.',
         image_url: '/gray_solicitors_mockup.png',
-        live_url: 'https://graysolicitors.ie',
+        live_url: 'https://github.com/Muchona/gray-solicitors',
         has_3d: false
       },
       {
@@ -121,7 +121,7 @@ export default function App() {
         name: 'Fro & Co Coffeehouse',
         description: 'Vibrant, engaging brand experience for a modern coffee shop.',
         image_url: '/fro-and-co.jpg',
-        live_url: 'https://froandco.ie',
+        live_url: 'https://github.com/Muchona/fro-and-co',
         has_3d: false
       },
       {
@@ -129,7 +129,7 @@ export default function App() {
         name: 'An Nead',
         description: 'Custom digital architecture, branding, and web presence.',
         image_url: '/og-image.png', // Fallback
-        live_url: '#',
+        live_url: 'https://github.com/Muchona/an-nead',
         has_3d: false
       },
       {
@@ -137,7 +137,7 @@ export default function App() {
         name: 'Monaghan Denture Clinic',
         description: 'High-performance web portal designed specifically for patient bookings and services.',
         image_url: '/og-image.png', // Fallback to onyx logo for now
-        live_url: 'https://monaghandentureclinic.ie',
+        live_url: 'https://github.com/Muchona/precision-denture-portal',
         has_3d: false
       },
       {
@@ -145,7 +145,7 @@ export default function App() {
         name: 'B3D Designs',
         description: 'Architecture and 3D design studio portfolio platform.',
         image_url: '/og-image.png', // Fallback
-        live_url: 'https://b3ddesigns.ie',
+        live_url: 'https://github.com/Muchona/b3d-designs',
         has_3d: true
       }
     ];
