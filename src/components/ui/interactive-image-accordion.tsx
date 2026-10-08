@@ -27,9 +27,9 @@ const items: AccordionItem[] = [
     },
     {
         id: 3,
-        title: "Cybernetic Systems",
+        title: "AI Agents & Automation",
         tag: "Protocol_03",
-        description: "Orchestrating complex digital environments with advanced scalability and adaptive intelligence.",
+        description: "Deploying custom, intelligent AI assistants to automate customer service, qualify leads, and scale your operations 24/7.",
         image: "C:\\Users\\mucho\\.gemini\\antigravity\\brain\\a457a813-ba5c-416d-bb2d-46f2ed5817dc\\accordion_cyber_architecture_1772748678645.png",
     },
     {

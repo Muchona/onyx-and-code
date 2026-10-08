@@ -382,6 +382,10 @@ export default function App() {
                     {
                       icon: <svg viewBox="0 0 24 24" className="w-[25px] h-[25px] fill-none stroke-current stroke-[1.5]"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path></svg>,
                       label: 'System Arch'
+                    },
+                    {
+                      icon: <svg viewBox="0 0 24 24" className="w-[25px] h-[25px] fill-none stroke-current stroke-[1.5]"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" /><circle cx="12" cy="12" r="4" /></svg>,
+                      label: 'AI Agents'
                     }
                   ].map((service, idx) => (
                     <div
