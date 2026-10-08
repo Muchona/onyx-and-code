@@ -145,7 +145,7 @@ export default function App() {
         name: 'B3D Designs',
         description: 'Architecture and 3D design studio portfolio platform.',
         image_url: '/b3d-thumbnail.jpg',
-        live_url: 'https://muchona.github.io/b3d-designs/',
+        live_url: 'https://www.b3ddesigns.ie/',
         has_3d: true
       }
     ];
