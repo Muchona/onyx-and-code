@@ -51,14 +51,14 @@ export default function AgentChat() {
             if (apiKey && apiKey !== 'YOUR_API_KEY_HERE') {
                 // Real AI Mode
                 const genAI = new GoogleGenerativeAI(apiKey);
-                const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
+                const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
                 const historyStr = messages.map(m => `${m.type === 'user' ? 'User' : 'Emily'}: ${m.text}`).join('\n');
 
                 const prompt = `
 You are "Emily", a professional digital architecture assistant for the web design agency "Onyx & Code".
 CRITICAL RULES:
-1. DO NOT start your responses with greetings like "Hello" or "Hi". Just answer the user directly.
+1. You have already greeted the user at the start of the chat. DO NOT say "Hi" or "Hello" again. Just answer their questions directly like a continuous conversation.
 2. Do not force the word "3D" into every answer. Only mention specific services if it naturally fits the conversation.
 3. Keep answers concise (under 50 words) and conversational.
 
