@@ -74,48 +74,76 @@ export default function App() {
   const [isLoadingProjects, setIsLoadingProjects] = useState(true);
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const { data } = await insforge.database
-          .from('projects')
-          .select('*')
-          .order('created_at', { ascending: true });
-
-        if (data) {
-          const sortedProjects = [...(data as Project[])].sort((a, b) => {
-            // Priority 1: Slice of Italy
-            if (a.name === 'Slice of Italy') return -1;
-            if (b.name === 'Slice of Italy') return 1;
-
-            // Priority 2: Roberto's Coffee
-            if (a.name === "Roberto's Coffee") return -1;
-            if (b.name === "Roberto's Coffee") return 1;
-
-            // Priority 3: Gray Solicitors
-            if (a.name === 'Gray Solicitors') return -1;
-            if (b.name === 'Gray Solicitors') return 1;
-
-            // Priority 4: B3D Designs
-            if (a.name === 'B3D Designs') return -1;
-            if (b.name === 'B3D Designs') return 1;
-
-            // Priority 5: Fro & Co Coffeehouse
-            if (a.name === 'Fro & Co Coffeehouse') return -1;
-            if (b.name === 'Fro & Co Coffeehouse') return 1;
-
-            // Default: newest first using created_at
-            return new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime();
-          });
-          setProjects(sortedProjects);
-        }
-      } catch (err) {
-        console.error('Error fetching projects:', err);
-      } finally {
-        setIsLoadingProjects(false);
+    // Hardcoded projects since the Insforge database was lost
+    const hardcodedProjects: Project[] = [
+      {
+        id: '1',
+        name: 'Slice of Italy',
+        description: 'Premium e-commerce and ordering platform for an authentic Italian pizzeria.',
+        image_url: '/slice-of-italy.png',
+        live_url: 'https://sliceofitaly.com',
+        has_3d: true
+      },
+      {
+        id: '2',
+        name: 'The Batch Loaf',
+        description: 'Modern, elegant restaurant website with integrated reservation systems.',
+        image_url: '/the-batch-loaf.png',
+        live_url: 'https://thebatchloaf.com',
+        has_3d: false
+      },
+      {
+        id: '3',
+        name: 'Jimmy\'s Bar & Restaurant',
+        description: 'Dynamic digital presence for a bustling local bar and restaurant.',
+        image_url: '/jimmys-bg.jpg',
+        live_url: 'https://jimmysbar.ie',
+        has_3d: false
+      },
+      {
+        id: '4',
+        name: 'Roberto\'s Coffee',
+        description: 'Immersive digital storefront for a specialty coffee roaster.',
+        image_url: '/robertos-coffee.png',
+        live_url: 'https://robertoscoffee.ie',
+        has_3d: true
+      },
+      {
+        id: '5',
+        name: 'Gray Solicitors',
+        description: 'Professional, high-trust corporate website for a legal firm.',
+        image_url: '/gray_solicitors_mockup.png',
+        live_url: 'https://graysolicitors.ie',
+        has_3d: false
+      },
+      {
+        id: '6',
+        name: 'Fro & Co Coffeehouse',
+        description: 'Vibrant, engaging brand experience for a modern coffee shop.',
+        image_url: '/fro-and-co.jpg',
+        live_url: 'https://froandco.ie',
+        has_3d: false
+      },
+      {
+        id: '7',
+        name: 'Monaghan Denture Clinic',
+        description: 'High-performance web portal designed specifically for patient bookings and services.',
+        image_url: '/og-image.png', // Fallback to onyx logo for now
+        live_url: 'https://monaghandentureclinic.ie',
+        has_3d: false
+      },
+      {
+        id: '8',
+        name: 'B3D Designs',
+        description: 'Architecture and 3D design studio portfolio platform.',
+        image_url: '/og-image.png', // Fallback
+        live_url: 'https://b3ddesigns.ie',
+        has_3d: true
       }
-    };
+    ];
 
-    fetchProjects();
+    setProjects(hardcodedProjects);
+    setIsLoadingProjects(false);
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
