@@ -126,7 +126,7 @@ export default function App() {
       },
       {
         id: '7',
-        name: 'Monaghan Denture Clinic',
+        name: 'Precision Dental Clinic',
         description: 'High-performance web portal designed specifically for patient bookings and services.',
         image_url: '/monaghan-thumbnail.jpg',
         live_url: 'https://precision-denture-portal.vercel.app/',
