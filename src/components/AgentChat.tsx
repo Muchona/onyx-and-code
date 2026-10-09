@@ -28,6 +28,8 @@ const FOUNDER_EMAIL = "mamikon@onyxandcode.com";
 
 export default function AgentChat() {
     const [isOpen, setIsOpen] = useState(false);
+    const [showTeaser, setShowTeaser] = useState(false);
+    const [hasDismissedTeaser, setHasDismissedTeaser] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
         {
             id: 1,
@@ -42,7 +44,29 @@ export default function AgentChat() {
     const chatRef = useRef<HTMLDivElement>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
-    const toggleChat = () => setIsOpen(!isOpen);
+    const toggleChat = () => {
+        setIsOpen(!isOpen);
+        if (!isOpen) {
+            setShowTeaser(false);
+        }
+    };
+
+    // Proactive Teaser Bubble: Opens gently after 4.5 seconds if chat has not been opened yet
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (!isOpen && !hasDismissedTeaser) {
+                setShowTeaser(true);
+            }
+        }, 4500);
+
+        return () => clearTimeout(timer);
+    }, [isOpen, hasDismissedTeaser]);
+
+    useEffect(() => {
+        if (isOpen) {
+            setShowTeaser(false);
+        }
+    }, [isOpen]);
 
     useEffect(() => {
         if (chatRef.current) {
@@ -75,7 +99,6 @@ export default function AgentChat() {
 
     const handleQuickAction = (promptText: string) => {
         setInput(promptText);
-        // trigger direct submit simulation
         executePrompt(promptText);
     };
 
@@ -103,8 +126,8 @@ export default function AgentChat() {
                                     type: SchemaType.OBJECT,
                                     properties: {
                                         subject: { type: SchemaType.STRING, description: "Punchy, clear email subject line" },
-                                        projectScope: { type: SchemaType.STRING, description: "Concise bullet-points or summary of the client request (e.g. 3D Dental Website with AI Agent)" },
-                                        estimatedBudget: { type: SchemaType.STRING, description: "Budget estimate or tier if relevant (e.g. €999+ Essential, €1,999+ Studio 3D, or €3,499+ Custom AI)" }
+                                        projectScope: { type: SchemaType.STRING, description: "Concise bullet-points or summary of the client request (e.g. Custom Website with AI Agent)" },
+                                        estimatedBudget: { type: SchemaType.STRING, description: "Budget estimate or tier if relevant (e.g. €999+ Essential, €1,999+ Studio, or €3,499+ Custom AI)" }
                                     },
                                     required: ["subject", "projectScope"]
                                 }
@@ -134,12 +157,12 @@ export default function AgentChat() {
 
                 const systemContext = `
 You are "Emily", the intelligent digital architecture specialist for "Onyx & Code", founded by Mamikon.
-Onyx & Code crafts ultra-premium web systems, 3D interactive experiences (Three.js/Spline), and custom autonomous AI Agents.
+Onyx & Code crafts ultra-premium custom websites, high-performance web systems, and autonomous AI Agents.
 
 OUR KEY WORK:
-- Precision Denture Clinic: 3D interactive dental portal
+- Precision Denture Clinic: Modern digital clinic portal
 - Slice of Italy: High-converting luxury Italian restaurant platform
-- Roberto's Coffee: Immersive 3D specialty coffee roaster
+- Roberto's Coffee: Immersive specialty coffee roaster website
 - The Batch Loaf & Jimmy's Bar: Modern hospitality web apps
 - Gray Solicitors: High-trust corporate legal platform
 - B3D Designs & An Nead: Innovative digital architectures
@@ -147,8 +170,9 @@ OUR KEY WORK:
 KEY RULES:
 1. Be polite, authoritative, and concise (under 45 words).
 2. DO NOT repeatedly say "Hi" or "Hello".
-3. When the user asks about getting a quote, starting a project, or getting in touch, ALWAYS call the "prepare_email_draft" tool to give them a 1-click email button to Mamikon (mamikon@onyxandcode.com). Do NOT ask them to book a phone call.
-4. When they ask to see projects, portfolio, pricing, or process, call "navigate_website".
+3. DO NOT force or repeatedly mention "3D". Refer naturally to "custom websites", high-performance web systems, or "AI agents" unless the user specifically asks for 3D.
+4. When the user asks about getting a quote, starting a project, or getting in touch, ALWAYS call the "prepare_email_draft" tool to give them a 1-click email button to Mamikon (mamikon@onyxandcode.com). Do NOT ask them to book a phone call.
+5. When they ask to see projects, portfolio, pricing, or process, call "navigate_website".
 `;
 
                 const fullPrompt = `${systemContext}\n\nRecent History:\n${historyStr}\n\nClient: ${userInput}\nEmily:`;
@@ -175,7 +199,7 @@ KEY RULES:
                         const args = call.args as any;
                         emailDraft = {
                             subject: args.subject || "Project Inquiry - Onyx & Code",
-                            projectScope: args.projectScope || "Discussing web development and AI agent solutions.",
+                            projectScope: args.projectScope || "Discussing custom website and AI agent solutions.",
                             estimatedBudget: args.estimatedBudget
                         };
                         if (!responseText) {
@@ -228,7 +252,7 @@ KEY RULES:
                     replyText = "I've structured a project brief for you. You can review the details and email Mamikon with one click:";
                     emailDraft = {
                         subject: "Project Inquiry & Quote Request - Onyx & Code",
-                        projectScope: "High-performance web architecture with modern interactive design and AI agent capabilities.",
+                        projectScope: "High-performance custom website architecture with modern interactive design and AI agent capabilities.",
                         estimatedBudget: "Studio Tier (€1,999+)"
                     };
                 } else if (lower.includes("portfolio") || lower.includes("work") || lower.includes("dental") || lower.includes("denture")) {
@@ -284,6 +308,48 @@ KEY RULES:
 
     return (
         <div className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[100] flex flex-col items-end gap-3 font-sans">
+            {/* Proactive Speech Bubble Teaser (appears gently after 4.5s) */}
+            {showTeaser && !isOpen && (
+                <div 
+                    onClick={() => {
+                        setShowTeaser(false);
+                        setIsOpen(true);
+                    }}
+                    className="relative max-w-[270px] sm:max-w-[300px] bg-black/95 backdrop-blur-2xl border border-gold-accent/40 rounded-2xl p-3.5 shadow-[0_10px_35px_rgba(0,0,0,0.85)] cursor-pointer group hover:border-gold-accent transition-all duration-300 text-left"
+                >
+                    {/* Dismiss Button */}
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setShowTeaser(false);
+                            setHasDismissedTeaser(true);
+                        }}
+                        className="absolute top-2 right-2 text-gray-400 hover:text-white p-1 rounded-full transition-colors z-10"
+                        aria-label="Dismiss greeting"
+                    >
+                        <X className="w-3.5 h-3.5" />
+                    </button>
+
+                    {/* Content */}
+                    <div className="pr-4">
+                        <div className="flex items-center gap-1.5 mb-1.5">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span className="text-[10px] font-mono font-bold text-gold-accent tracking-wider uppercase">Emily AI</span>
+                        </div>
+                        <p className="text-xs text-gray-200 leading-snug">
+                            👋 Looking for a <span className="text-white font-semibold">custom website</span> or an <span className="text-white font-semibold">AI agent</span>?
+                        </p>
+                        <div className="mt-2 flex items-center gap-1 text-[11px] font-mono text-gold-accent group-hover:translate-x-0.5 transition-transform">
+                            <span>Get a quick quote for Mamikon</span>
+                            <span>→</span>
+                        </div>
+                    </div>
+
+                    {/* Speech Bubble Arrow */}
+                    <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-black/95 border-b border-r border-gold-accent/40 transform rotate-45"></div>
+                </div>
+            )}
+
             {/* Chat Window */}
             <div
                 ref={chatRef}
@@ -423,21 +489,21 @@ KEY RULES:
                                 <p className="text-[11px] text-gray-500 font-mono uppercase tracking-wider">Suggested Actions:</p>
                                 <div className="flex flex-col gap-1.5">
                                     <button
-                                        onClick={() => handleQuickAction("Can I get a quote and email Mamikon for my project?")}
+                                        onClick={() => handleQuickAction("Can I get a quote and email Mamikon for my custom website?")}
                                         className="text-left px-3 py-2 rounded-lg bg-white/5 hover:bg-gold-accent/15 border border-white/10 text-xs text-gray-300 hover:text-white transition-colors flex items-center justify-between group"
                                     >
                                         <span>✉️ Email Mamikon for a custom quote</span>
                                         <span className="text-gold-accent opacity-0 group-hover:opacity-100 transition-opacity">→</span>
                                     </button>
                                     <button
-                                        onClick={() => handleQuickAction("Show me your 3D Dental Clinic project")}
+                                        onClick={() => handleQuickAction("Show me the Precision Dental Clinic project")}
                                         className="text-left px-3 py-2 rounded-lg bg-white/5 hover:bg-gold-accent/15 border border-white/10 text-xs text-gray-300 hover:text-white transition-colors flex items-center justify-between group"
                                     >
-                                        <span>🦷 View Precision Dental 3D Portal</span>
+                                        <span>🦷 View Precision Dental Clinic Website</span>
                                         <span className="text-gold-accent opacity-0 group-hover:opacity-100 transition-opacity">→</span>
                                     </button>
                                     <button
-                                        onClick={() => handleQuickAction("What are your web development pricing tiers?")}
+                                        onClick={() => handleQuickAction("What are your custom website pricing tiers?")}
                                         className="text-left px-3 py-2 rounded-lg bg-white/5 hover:bg-gold-accent/15 border border-white/10 text-xs text-gray-300 hover:text-white transition-colors flex items-center justify-between group"
                                     >
                                         <span>💰 Explore Pricing & Investment Tiers</span>
