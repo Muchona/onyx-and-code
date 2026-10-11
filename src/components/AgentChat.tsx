@@ -134,13 +134,13 @@ export default function AgentChat() {
                             },
                             {
                                 name: "navigate_website",
-                                description: "Scroll the user to a specific section on the page (portfolio, pricing, process, about, contact) or showcase relevant work.",
+                                description: "Scroll the user to a specific section on the page: portfolio, pricing, process, about, visit (location, address & hours), or contact.",
                                 parameters: {
                                     type: SchemaType.OBJECT,
                                     properties: {
                                         section: {
                                             type: SchemaType.STRING,
-                                            description: "Target section id: portfolio, pricing, process, about, or contact"
+                                            description: "Target section id: portfolio, pricing, process, about, visit, or contact"
                                         }
                                     },
                                     required: ["section"]
@@ -156,10 +156,28 @@ export default function AgentChat() {
                     .join('\n');
 
                 const systemContext = `
-You are "Emily", the intelligent digital architecture specialist for "Onyx & Code", founded by Mamikon.
-Onyx & Code crafts ultra-premium custom websites, high-performance web systems, and autonomous AI Agents.
+You are "Emily", the intelligent digital architecture specialist for "Onyx & Code", founded by Mamikon Hovhannisyan.
+Onyx & Code is an elite digital development agency based in Monaghan, Ireland, crafting ultra-premium custom websites, high-performance web systems, and autonomous AI Agents.
 
-OUR KEY WORK:
+BUSINESS INFORMATION & KNOWLEDGE:
+- Physical Location & Address: 20 Dr Mckenna Terrace, Connolly Park, Monaghan, Co. Monaghan, H18 ET72, Ireland.
+- Founder & Lead Architect: Mamikon Hovhannisyan
+- Official Contact Email: mamikon@onyxandcode.com
+- Operational Working Hours:
+  • Monday & Wednesday: 10:00 AM – 8:00 PM
+  • Tuesday & Thursday: 9:00 AM – 8:00 PM
+  • Friday: Offline (Closed)
+  • Saturday: 12:00 PM – 8:00 PM
+  • Sunday: 12:00 PM – 6:00 PM
+- Website Sections you can navigate to:
+  • "visit": Physical location in Monaghan, working hours, and interactive Google Map
+  • "portfolio": Live client case studies and showcases
+  • "pricing": Transparent investment tiers (Essential €999+, Studio €1,999+, Custom AI €3,499+)
+  • "process": 4-step execution blueprint (Discovery, Architecture, Engineering, Deployment)
+  • "about": Agency philosophy and tech stack
+  • "contact": Direct inquiry form and contact options
+
+OUR KEY CLIENT WORK:
 - Precision Denture Clinic: Modern digital clinic portal
 - Slice of Italy: High-converting luxury Italian restaurant platform
 - Roberto's Coffee: Immersive specialty coffee roaster website
@@ -168,11 +186,13 @@ OUR KEY WORK:
 - B3D Designs & An Nead: Innovative digital architectures
 
 KEY RULES:
-1. Be polite, authoritative, and concise (under 45 words).
+1. Be polite, authoritative, helpful, and concise (under 50 words).
 2. DO NOT repeatedly say "Hi" or "Hello".
-3. DO NOT force or repeatedly mention "3D". Refer naturally to "custom websites", high-performance web systems, or "AI agents" unless the user specifically asks for 3D.
-4. When the user asks about getting a quote, starting a project, or getting in touch, ALWAYS call the "prepare_email_draft" tool to give them a 1-click email button to Mamikon (mamikon@onyxandcode.com). Do NOT ask them to book a phone call.
-5. When they ask to see projects, portfolio, pricing, or process, call "navigate_website".
+3. When asked about our address, location, or where we are based, give the exact address in Monaghan and call "navigate_website" with section "visit".
+4. When asked about working hours, opening times, or schedule, state the exact hours clearly and accurately. Mention that Friday is Offline.
+5. DO NOT force or repeatedly mention "3D". Refer naturally to "custom websites", high-performance web systems, or "AI agents" unless the user specifically asks for 3D.
+6. When the user asks about getting a quote, starting a project, or getting in touch, ALWAYS call the "prepare_email_draft" tool to give them a 1-click email button to Mamikon (mamikon@onyxandcode.com). Do NOT ask them to book a phone call.
+7. When they ask to see projects, portfolio, pricing, process, or location/visit, call "navigate_website".
 `;
 
                 const fullPrompt = `${systemContext}\n\nRecent History:\n${historyStr}\n\nClient: ${userInput}\nEmily:`;
@@ -210,7 +230,7 @@ KEY RULES:
                         const section = args.section?.toLowerCase() || "portfolio";
                         navSection = {
                             id: section,
-                            label: section.charAt(0).toUpperCase() + section.slice(1)
+                            label: section === 'visit' ? 'Location & Hours' : section.charAt(0).toUpperCase() + section.slice(1)
                         };
                         navigateToSection(section);
                         if (!responseText) {
@@ -248,7 +268,15 @@ KEY RULES:
                 let navSection: { id: string; label: string } | undefined = undefined;
                 let projectHighlight: { name: string; url: string } | undefined = undefined;
 
-                if (lower.includes("price") || lower.includes("cost") || lower.includes("quote") || lower.includes("email") || lower.includes("hire") || lower.includes("contact")) {
+                if (lower.includes("hour") || lower.includes("time") || lower.includes("open") || lower.includes("close") || lower.includes("schedule") || lower.includes("when")) {
+                    replyText = "Our operational hours in Monaghan:\n• Mon, Wed: 10AM - 8PM\n• Tue, Thu: 9AM - 8PM\n• Fri: Offline\n• Sat: 12PM - 8PM\n• Sun: 12PM - 6PM\nWould you like to email Mamikon directly?";
+                    navSection = { id: "visit", label: "Hours & Location" };
+                    navigateToSection("visit");
+                } else if (lower.includes("address") || lower.includes("location") || lower.includes("where") || lower.includes("monaghan") || lower.includes("visit") || lower.includes("map") || lower.includes("office") || lower.includes("studio")) {
+                    replyText = "We are located at 20 Dr Mckenna Terrace, Connolly Park, Monaghan, Co. Monaghan, H18 ET72, Ireland. You can explore our lab location on the interactive map below:";
+                    navSection = { id: "visit", label: "Location & Map" };
+                    navigateToSection("visit");
+                } else if (lower.includes("price") || lower.includes("cost") || lower.includes("quote") || lower.includes("email") || lower.includes("hire") || lower.includes("contact")) {
                     replyText = "I've structured a project brief for you. You can review the details and email Mamikon with one click:";
                     emailDraft = {
                         subject: "Project Inquiry & Quote Request - Onyx & Code",
