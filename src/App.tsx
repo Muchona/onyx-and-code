@@ -97,7 +97,7 @@ export default function App() {
         name: 'Jimmy\'s Bar & Restaurant',
         description: 'Dynamic digital presence for a bustling local bar and restaurant.',
         image_url: '/jimmys-bg.jpg',
-        live_url: 'https://muchona.github.io/jimmys-bar/',
+        live_url: 'https://muchona.github.io/jimmys-bar-and-restaurant/',
         has_3d: false
       },
       {
@@ -113,7 +113,7 @@ export default function App() {
         name: 'Gray Solicitors',
         description: 'Professional, high-trust corporate website for a legal firm.',
         image_url: '/gray_solicitors_mockup.png',
-        live_url: 'https://muchona.github.io/gray-solicitors/',
+        live_url: 'https://muchona.github.io/elena-gray-solicitors-website/',
         has_3d: false
       },
       {
@@ -121,7 +121,7 @@ export default function App() {
         name: 'Fro & Co Coffeehouse',
         description: 'Vibrant, engaging brand experience for a modern coffee shop.',
         image_url: '/fro-and-co.jpg',
-        live_url: 'https://muchona.github.io/fro-and-co/',
+        live_url: 'https://muchona.github.io/Fro-and-Co/',
         has_3d: false
       },
       {
